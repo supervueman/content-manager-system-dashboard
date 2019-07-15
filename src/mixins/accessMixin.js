@@ -20,10 +20,6 @@ const mixin = {
 
       if (bool) return true;
       return false;
-    },
-
-    accessDenied() {
-      return !(!(this.adminAccess || this.managerAccess) || this.userAccess);
     }
   },
 }

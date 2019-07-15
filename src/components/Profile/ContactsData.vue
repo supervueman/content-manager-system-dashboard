@@ -11,6 +11,7 @@
                 @input="$emit('update:email', $event)"
                 :value="email"
                 label="E-mail:"
+                :error-messages="errors"
                 required
               )
             v-flex.md6
@@ -45,9 +46,10 @@
 
 <script>
 import panelMixin from "@/mixins/panelMixin";
+import { validationMixin } from "vuelidate";
 export default {
   name: "ContactsData",
-  mixins: [panelMixin],
+  mixins: [panelMixin, validationMixin],
   props: {
     email: {
       type: String,
@@ -68,6 +70,10 @@ export default {
     instagram: {
       type: String,
       default: ""
+    },
+    errors: {
+      type: Array,
+      default: {}
     }
   },
   data() {

@@ -1,11 +1,11 @@
 export default [{
   path: '/',
   name: 'main',
-  component: 'Auth'
+  component: 'Index'
 }, {
-  path: '/auth',
-  name: 'auth',
-  component: 'Auth'
+  path: '/login',
+  name: 'login',
+  component: 'Login'
 }, {
   path: '/profile',
   name: 'profile',

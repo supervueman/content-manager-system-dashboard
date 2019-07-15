@@ -12,10 +12,13 @@ export const profile = {
   // Admin
   role: 'admin',
   rang: 9999,
+  slug: 'admin',
   // Manager
   // role: 'manager',
   // rang: 1,
+  // slug: 'manager_1'
   // User
   // role: 'user',
-  // rang: 0
+  // rang: 0,
+  // slug: 'user_1'
 };

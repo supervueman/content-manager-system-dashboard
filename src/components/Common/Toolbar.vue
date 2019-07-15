@@ -4,8 +4,8 @@
     v-toolbar-title
       //- img(:src="`${imgFolderBasePath}/logo.svg`" class="toolbar-logo")
     v-spacer
-    v-toolbar-items.hidden-xs-and-down(v-if="")
-      v-btn(flat to="/auth" v-if="!(adminAccess || managerAccess)") Войти
+    v-toolbar-items.hidden-xs-and-down
+      v-btn(flat to="/login" v-if="!(adminAccess || managerAccess)") Войти
     v-toolbar-items.hidden-xs-and-down
       v-menu(offset-y v-if="adminAccess || managerAccess")
         v-btn(flat slot="activator")

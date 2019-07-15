@@ -63,7 +63,7 @@ export default {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email && errors.push("E-mail не валиден");
-      !this.$v.email.required && errors.push("Обязатедьнок поле");
+      !this.$v.email.required && errors.push("Обязательное поле");
       return errors;
     }
   },

@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex
-    .body-2.mb-5 Ваш профиль
+    .body-2.mb-5 Ваш профиль: {{profile.slug}}
     v-layout.wrap.pt-5
       v-flex.xs12.md7.pr-2
         main-data(
@@ -9,13 +9,50 @@
           :patronymic.sync="profile.patronymic"
         )
 
-        contacts-data(
-          :email.sync="profile.email"
-          :phone.sync="profile.phone"
-          :vkontakte.sync="profile.vkontakte"
-          :facebook.sync="profile.facebook"
-          :instagram.sync="profile.instagram"
-        )
+        v-expansion-panel(v-model="panel" expand)
+          v-expansion-panel-content
+            template.px-2(v-slot:header)
+              div Контакты
+            v-card
+              v-card-text
+                v-layout.wrap
+                  v-flex.md6.pr-3
+                    v-text-field(
+                      v-model="profile.email"
+                      label="E-mail:"
+                      :error-messages="emailErrors"
+                      required
+                      @input="$v.profile.email.$touch()"
+                      @blur="$v.profile.email.$touch()"
+                    )
+                  v-flex.md6
+                    v-text-field(
+                      v-model="profile.phone"
+                      :value="profile.phone"
+                      label="Телефон:"
+                      required
+                    )
+                  v-flex.md6.pr-3
+                    v-text-field(
+                      v-model="profile.vkontakte"
+                      :value="profile.vkontakte"
+                      label="Vkontakte:"
+                      required
+                    )
+                  v-flex.md6
+                    v-text-field(
+                      v-model="profile.facebook"
+                      :value="profile.facebook"
+                      label="Facebook:"
+                      required
+                    )
+                  v-flex.md6.pr-3
+                    v-text-field(
+                      v-model="profile.instagram"
+                      :value="profile.instagram"
+                      label="Instagram:"
+                      required
+                    )
 
         v-expansion-panel(expand v-if="adminAccess || managerAccess")
           v-expansion-panel-content
@@ -53,31 +90,39 @@
 <script>
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
+import { validationMixin } from "vuelidate";
+import panelMixin from "@/mixins/panelMixin";
 // Components
 import MainData from "@/components/Profile/MainData";
-import ContactsData from "@/components/Profile/ContactsData";
 import AvatarData from "@/components/Profile/AvatarData";
 import PasswordChange from "@/components/Profile/PasswordChange";
+// Libs
+import { required, minLength, email } from "vuelidate/lib/validators";
 
 export default {
   name: "Profile",
-  mixins: [accessMixin],
+  mixins: [validationMixin, accessMixin, panelMixin],
+  validations: {
+    profile: {
+      email: { required, email }
+    }
+  },
   data() {
     return {
       isChanged: false,
       isChangesConfirmDialog: false,
       confirmKey: "",
-      routeLinkTo: ""
+      routeLinkTo: "",
+      panelName: "panel-profile-contacts-data"
     };
   },
   computed: {
-    profile() {
-      return this.$store.getters["profile/getProfile"];
-    }
-  },
-  watch: {
-    profile() {
-      this.isChanged = true;
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.profile.email.$dirty) return errors;
+      !this.$v.profile.email.email && errors.push("E-mail не валиден");
+      !this.$v.profile.email.required && errors.push("Обязательное поле");
+      return errors;
     }
   },
   methods: {
@@ -87,8 +132,10 @@ export default {
      * Сохраняет профиль вызывая {@link store/profileOwner/saveProfile}
      */
     save() {
-      const profile = this.profile;
-      this.$store.dispatch("profileOwner/saveProfile", profile);
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        console.log("Save");
+      }
     },
 
     /**
@@ -120,7 +167,6 @@ export default {
 
   components: {
     MainData,
-    ContactsData,
     AvatarData,
     PasswordChange
   },
