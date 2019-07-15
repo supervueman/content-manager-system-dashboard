@@ -28,6 +28,7 @@
                   v-flex.md6
                     v-text-field(
                       v-model="profile.phone"
+                      mask="+7 (###) ###-##-##"
                       :value="profile.phone"
                       label="Телефон:"
                       required
@@ -172,7 +173,7 @@ export default {
   components: {
     MainData,
     AvatarData,
-    PasswordChange
+    PasswordChange,
   },
 
   /**

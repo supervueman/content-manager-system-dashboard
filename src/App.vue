@@ -1,9 +1,11 @@
 <template lang="pug">
   v-app(light)
-    notification(
-      :type="notification.type"
-      :message="notification.message"
-    )
+    transition(name="fade")
+      notification(
+        v-if="notification.isNotification"
+        :type="notification.type"
+        :message="notification.message"
+      )
     toolbar(
       :profileId="profile.id"
       :profileFirstname="profile.firstname"
@@ -37,3 +39,11 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+.fade-enter-active, .fade-leave-active
+	transition: opacity .5s
+.fade-enter, .fade-leave-to
+	opacity: 0
+</style>
+

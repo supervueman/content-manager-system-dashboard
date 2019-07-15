@@ -4,7 +4,7 @@ export const profile = {
   lastname: 'Davlikamov',
   patronymic: '',
   email: 'supervueman@gmail.com',
-  phone: '8 (937) 078-08-30',
+  phone: '9370780830',
   facebook: '',
   instagram: '',
   vkontakte: '',
