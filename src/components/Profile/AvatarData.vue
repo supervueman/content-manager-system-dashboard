@@ -14,6 +14,7 @@
 <script>
 import { imgFolderBasePath } from "@/config";
 export default {
+  name: "AvatarData",
   props: {
     lastname: {
       type: String,

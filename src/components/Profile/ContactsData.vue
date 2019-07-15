@@ -46,6 +46,7 @@
 <script>
 import panelMixin from "@/mixins/panelMixin";
 export default {
+  name: "ContactsData",
   mixins: [panelMixin],
   props: {
     email: {

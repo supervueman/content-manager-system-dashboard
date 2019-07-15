@@ -62,6 +62,7 @@
 import panelMixin from "@/mixins/panelMixin";
 import accessMixin from "@/mixins/accessMixin";
 export default {
+  name: "Sidebar",
   mixins: [panelMixin, accessMixin],
   data() {
     return {

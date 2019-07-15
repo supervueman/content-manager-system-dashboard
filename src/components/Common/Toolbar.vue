@@ -24,6 +24,7 @@
 import { imgFolderBasePath } from "@/config";
 import accessMixin from "@/mixins/accessMixin";
 export default {
+  name: "Toolbar",
   mixins: [accessMixin],
   props: {
     profileId: {

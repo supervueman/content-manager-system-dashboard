@@ -49,6 +49,7 @@ import { validationMixin } from "vuelidate";
 import { helpers, required, sameAs, minLength } from "vuelidate/lib/validators";
 
 export default {
+  name: "PasswordChange",
   mixins: [validationMixin],
   validations: {
     oldPassword: {

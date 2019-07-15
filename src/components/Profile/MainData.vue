@@ -32,6 +32,7 @@
 <script>
 import panelMixin from "@/mixins/panelMixin";
 export default {
+  name: 'Maindata',
   mixins: [panelMixin],
   props: {
     lastname: {

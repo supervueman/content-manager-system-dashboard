@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: "ChangesConfirm",
   props: {
     isChanged: {
       type: Boolean,

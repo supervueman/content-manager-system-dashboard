@@ -23,13 +23,20 @@ export default {
       //
     };
   },
-  async mounted() {
-    await this.$store.dispatch("profile/fetchProfile");
-    if (this.$route.fullPath === "/auth" || this.$route.fullPath === "/") {
-      if (this.$store.getters["profile/getProfile"].role === "admin") {
-        this.$router.push("/profile");
+  watch: {
+    accessDenied() {
+      if (this.accessDenied) {
+        if (this.$route.fullPath === "/auth" || this.$route.fullPath === "/") {
+          this.$router.push("/profile");
+        }
+      } else {
+        this.$router.push("/auth");
       }
     }
+  },
+  async mounted() {
+    this.$router.push("/auth");
+    await this.$store.dispatch("profile/fetchProfile");
   }
 };
 </script>

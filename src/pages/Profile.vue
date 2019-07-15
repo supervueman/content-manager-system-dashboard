@@ -60,6 +60,7 @@ import AvatarData from "@/components/Profile/AvatarData";
 import PasswordChange from "@/components/Profile/PasswordChange";
 
 export default {
+  name: "Profile",
   mixins: [accessMixin],
   data() {
     return {

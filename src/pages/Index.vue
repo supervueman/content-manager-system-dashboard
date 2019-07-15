@@ -5,6 +5,7 @@
 <script>
 import config from "@/config";
 export default {
+  name: "Index",
   data() {
     return {
       staticFolderBasePath: config.staticFolderBasePath

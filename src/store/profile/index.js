@@ -16,7 +16,9 @@ export default {
     async fetchProfile({
       commit
     }) {
-      commit('setProfile', profile);
+      setTimeout(() => {
+        commit('setProfile', profile);
+      }, 1500);
     },
 
     setProfile({

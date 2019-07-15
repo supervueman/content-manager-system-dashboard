@@ -6,6 +6,7 @@
 <script>
 import config from "@/config";
 export default {
+  name: "Avatar",
   props: {
     imagePath: {
       type: String,
