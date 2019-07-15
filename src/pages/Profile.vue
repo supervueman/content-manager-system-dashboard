@@ -6,6 +6,7 @@
         main-data(
           :lastname.sync="profile.lastname"
           :firstname.sync="profile.firstname"
+          :patronymic.sync="profile.patronymic"
         )
 
         contacts-data(
@@ -26,7 +27,7 @@
                   div Api key: sdfew45frs4e3qwvfdrt5e4rt354tvfds
 
         password-change
-        
+
         v-card
           v-card-actions
             v-btn.ml-2(color="primary" @click="save") Сохранить
@@ -50,7 +51,14 @@
 </template>
 
 <script>
+// Mixins
 import accessMixin from "@/mixins/accessMixin";
+// Components
+import MainData from "@/components/Profile/MainData";
+import ContactsData from "@/components/Profile/ContactsData";
+import AvatarData from "@/components/Profile/AvatarData";
+import PasswordChange from "@/components/Profile/PasswordChange";
+
 export default {
   mixins: [accessMixin],
   data() {
@@ -107,6 +115,13 @@ export default {
         this.$router.push(this.routeLinkTo);
       }
     }
+  },
+
+  components: {
+    MainData,
+    ContactsData,
+    AvatarData,
+    PasswordChange
   },
 
   /**

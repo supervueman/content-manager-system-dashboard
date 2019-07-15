@@ -20,6 +20,13 @@
                 label="Имя:"
                 required
               )
+            v-flex.md6.pr-3
+              v-text-field(
+                @input="$emit('update:patronymic', $event)"
+                :value="patronymic"
+                label="Отчество:"
+                required
+              )
 </template>
 
 <script>
@@ -32,6 +39,10 @@ export default {
       default: ""
     },
     firstname: {
+      type: String,
+      default: ""
+    },
+    patronymic: {
       type: String,
       default: ""
     }
