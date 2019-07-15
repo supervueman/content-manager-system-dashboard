@@ -22,7 +22,7 @@
 
 <script>
 import { imgFolderBasePath } from "@/config";
-import accessMixin from "@/plugins/accessMixin";
+import accessMixin from "@/mixins/accessMixin";
 export default {
   mixins: [accessMixin],
   props: {

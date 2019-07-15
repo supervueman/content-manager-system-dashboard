@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import panelMixin from "@/plugins/panelMixin";
+import panelMixin from "@/mixins/panelMixin";
 export default {
   mixins: [panelMixin],
   props: {

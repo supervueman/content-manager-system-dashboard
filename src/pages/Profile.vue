@@ -16,7 +16,7 @@
           :instagram.sync="profile.instagram"
         )
 
-        v-expansion-panel(expand v-if="profile.role === 'manager' && profile.rang === 1")
+        v-expansion-panel(expand v-if="adminAccess || managerAccess")
           v-expansion-panel-content
             template(v-slot:header)
               div Ключи
@@ -50,7 +50,9 @@
 </template>
 
 <script>
+import accessMixin from "@/mixins/accessMixin";
 export default {
+  mixins: [accessMixin],
   data() {
     return {
       isChanged: false,

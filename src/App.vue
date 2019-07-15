@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import accessMixin from "@/plugins/accessMixin";
+import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "App",
   mixins: [accessMixin],

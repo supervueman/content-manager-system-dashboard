@@ -59,8 +59,8 @@
 </template>
 
 <script>
-import panelMixin from "@/plugins/panelMixin";
-import accessMixin from "@/plugins/accessMixin";
+import panelMixin from "@/mixins/panelMixin";
+import accessMixin from "@/mixins/accessMixin";
 export default {
   mixins: [panelMixin, accessMixin],
   data() {
