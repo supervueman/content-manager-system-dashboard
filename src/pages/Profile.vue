@@ -134,7 +134,11 @@ export default {
     save() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        console.log("Save");
+        this.$store.dispatch("fetchNotification", {
+          type: "success",
+          message: `Успешно сохранено.`,
+          isNotification: true
+        });
       }
     },
 

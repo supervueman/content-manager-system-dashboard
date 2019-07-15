@@ -122,7 +122,7 @@ export default {
         oldPassword: this.oldPassword,
         newPassword: this.newPassword
       };
-      await this.$store.dispatch("changePassword", data);
+      // await this.$store.dispatch("changePassword", data);
 
       this.clearPassword();
     },

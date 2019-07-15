@@ -1,5 +1,9 @@
 <template lang="pug">
   v-app(light)
+    notification(
+      :type="notification.type"
+      :message="notification.message"
+    )
     toolbar(
       :profileId="profile.id"
       :profileFirstname="profile.firstname"
@@ -18,7 +22,11 @@ import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "App",
   mixins: [accessMixin],
-
+  computed: {
+    notification() {
+      return this.$store.getters.getNotification;
+    }
+  },
   async beforeCreate() {
     await this.$store.dispatch("profile/fetchProfile");
     if (this.adminAccess || this.managerAccess) {
