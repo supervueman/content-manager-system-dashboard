@@ -110,8 +110,18 @@
                 Editor(v-model="resource.content")
     v-card
       v-card-actions
-        v-btn.ml-2(color="primary") Сохранить
-        v-btn(color="error") Удалить
+        v-btn.ml-2(
+          color="primary"
+          v-if="resource.id !== '' && resource.id !== undefined"
+        ) Сохранить
+        v-btn.ml-2(
+          color="primary"
+          v-if="managerAccess && resource.id === ''"
+        ) Создать
+        v-btn.ml-2(
+          color="error"
+          v-if="resource.id !== undefined && resource.id !== ''"
+        ) Удалить
 </template>
 
 <script>
