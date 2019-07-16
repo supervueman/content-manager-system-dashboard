@@ -48,12 +48,17 @@
       v-tab(v-if="adminAccess") Элементы
       v-tab-item(v-if="adminAccess")
         v-list
+          v-list-tile(to="/layouts")
+            v-list-tile-action
+              v-icon(color="primary") playlist_add
+            v-list-tile-content
+              v-list-tile-title Шаблоны
           v-list-tile(to="/additional-fields")
             v-list-tile-action
               v-icon(color="primary") playlist_add
             v-list-tile-content
               v-list-tile-title Дополнительные поля
-      
+
       v-tab Файлы
       v-tab-item
         v-list

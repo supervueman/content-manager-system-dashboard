@@ -18,4 +18,8 @@ export default [{
   path: '/filesystem',
   name: 'filesystem',
   component: 'Filesystem'
+}, {
+  path: '/layouts/:id',
+  name: 'layout',
+  component: 'Layout'
 }]
