@@ -108,6 +108,10 @@
             v-layout.wrap
               v-flex.md12
                 Editor(v-model="resource.content")
+    v-card
+      v-card-actions
+        v-btn.ml-2(color="primary") Сохранить
+        v-btn(color="error") Удалить
 </template>
 
 <script>
