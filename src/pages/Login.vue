@@ -38,7 +38,7 @@
 import { validationMixin } from "vuelidate";
 import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
-  name: "Auth",
+  name: "Login",
   mixins: [validationMixin],
   validations: {
     password: { required, minLength: minLength(6) },
