@@ -22,4 +22,8 @@ export default [{
   path: '/layouts/:id',
   name: 'layout',
   component: 'Layout'
+}, {
+  path: '/additional-fields/:id',
+  name: 'additional-field',
+  component: 'AdditionalField'
 }]

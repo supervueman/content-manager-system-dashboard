@@ -89,7 +89,7 @@
                       :items="[{id: '1' ,slug: 'base', title: 'Базовый шаблон'}, {id: '2', slug: 'custom', title: 'Кастомный шаблон'}]"
                       item-text="title"
                       return-object
-                      label="Standard"
+                      label="Шаблон:"
                       v-model="resource.layout"
                       v-on="on"
                       required
@@ -200,10 +200,16 @@ export default {
 
   methods: {
     create() {
-      this.$store.dispatch("resource/createResource", this.resource);
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$store.dispatch("resource/createResource", this.resource);
+      }
     },
     update() {
-      this.$store.dispatch("resource/updateResource", this.resource);
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$store.dispatch("resource/updateResource", this.resource);
+      }
     },
     remove() {
       this.$store.dispatch("resource/removeResource", this.resource.id);

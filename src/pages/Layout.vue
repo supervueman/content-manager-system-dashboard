@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-5 Шаблон: {{$route.params.id}}
+    .body-2.mb-5 Шаблон: {{layout.title}}
     v-layout.wrap.pt-5
       v-flex.xs12.md7.pr-2
         v-expansion-panel(v-model="panel" expand)
@@ -11,30 +11,24 @@
               v-card-text
                 v-layout.wrap
                   v-flex.md12
-                    v-tooltip(top)
-                      template(v-slot:activator="{ on }")
-                        v-text-field(
-                          v-model="layout.slug"
-                          label="Псевдоним:"
-                          v-on="on"
-                          required
-                          @input="$v.layout.slug.$touch()"
-                          @blur="$v.layout.slug.$touch()"
-                          :error-messages="slugErrors"
-                        )
-                      span slug
-                    v-tooltip(top)
-                      template(v-slot:activator="{ on }")
-                        v-text-field(
-                          v-model="layout.title"
-                          label="Наименование:"
-                          v-on="on"
-                          required
-                          @input="$v.layout.title.$touch()"
-                          @blur="$v.layout.title.$touch()"
-                          :error-messages="titleErrors"
-                        )
-                      span title
+                    v-text-field(
+                      v-model="layout.slug"
+                      label="Псевдоним:"
+                      v-on="on"
+                      required
+                      @input="$v.layout.slug.$touch()"
+                      @blur="$v.layout.slug.$touch()"
+                      :error-messages="slugErrors"
+                    )
+                    v-text-field(
+                      v-model="layout.title"
+                      label="Наименование:"
+                      v-on="on"
+                      required
+                      @input="$v.layout.title.$touch()"
+                      @blur="$v.layout.title.$touch()"
+                      :error-messages="titleErrors"
+                    )
         v-card(v-if="adminAccess")
           v-card-actions
             v-btn.ml-2(
@@ -119,10 +113,16 @@ export default {
 
   methods: {
     async create() {
-      await this.$store.dispatch("layout/createLayout", this.layout);
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        await this.$store.dispatch("layout/createLayout", this.layout);
+      }
     },
     async update() {
-      await this.$store.dispatch("layout/updateLayout", this.layout);
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        await this.$store.dispatch("layout/updateLayout", this.layout);
+      }
     },
     async remove() {
       await this.$store.dispatch("layout/removeLayout", this.layout.id);

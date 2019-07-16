@@ -9,6 +9,7 @@ import authenticate from './authenticate';
 import resource from './resource';
 import filesystem from './filesystem';
 import layout from './layout';
+import additionalField from './additional-field';
 
 export const store = new Vuex.Store({
   modules: {
@@ -17,6 +18,7 @@ export const store = new Vuex.Store({
     profile,
     resource,
     filesystem,
-    layout
+    layout,
+    additionalField
   }
 });
