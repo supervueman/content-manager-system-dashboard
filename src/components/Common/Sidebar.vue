@@ -56,6 +56,12 @@
       
       v-tab Файлы
       v-tab-item
+        v-list
+          v-list-tile(to="/filesystem")
+            v-list-tile-action
+              v-icon(color="primary") folder
+            v-list-tile-content
+              v-list-tile-title Файловая система
 </template>
 
 <script>

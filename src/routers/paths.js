@@ -14,4 +14,8 @@ export default [{
   path: '/resources/:id',
   name: 'resource',
   component: 'Resource'
+}, {
+  path: '/filesystem',
+  name: 'filesystem',
+  component: 'Filesystem'
 }]

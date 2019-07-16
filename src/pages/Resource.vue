@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex
-    .body-2.mb-5 Ресурс: {{resource}} 
+    .body-2.mb-5 Ресурс: {{resource.title}} 
     v-layout.wrap.pt-5
       v-flex.xs12.md7.pr-2
         v-expansion-panel(v-model="panel" expand)
