@@ -17,11 +17,11 @@ export default {
      * @param {String} payload layout.id
      * Функция для получения шаблона по id
      */
-    async fetchResource({
+    async fetchLayout({
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setResource', layout);
+        commit('setLayout', layout);
       }, 1500);
     },
 

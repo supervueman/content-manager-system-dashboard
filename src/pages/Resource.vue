@@ -118,14 +118,14 @@
       v-card-actions
         v-btn.ml-2(
           color="primary"
-          v-if="resource.id !== '' && resource.id !== undefined"
-          @click="update"
-        ) Сохранить
-        v-btn.ml-2(
-          color="primary"
           v-if="managerAccess && resource.id === ''"
           @click="create"
         ) Создать
+        v-btn.ml-2(
+          color="primary"
+          v-if="resource.id !== '' && resource.id !== undefined"
+          @click="update"
+        ) Сохранить
         v-btn.ml-2(
           color="error"
           v-if="resource.id !== undefined && resource.id !== ''"
@@ -151,8 +151,7 @@ import { validationMixin } from "vuelidate";
 // Components
 import Editor from "@/components/Editor/VueEditor";
 // Libs
-import { required, minLength } from "vuelidate/lib/validators";
-import { helpers } from "vuelidate/lib/validators";
+import { required, minLength, helpers } from "vuelidate/lib/validators";
 
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
