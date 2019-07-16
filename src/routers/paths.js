@@ -10,4 +10,8 @@ export default [{
   path: '/profile',
   name: 'profile',
   component: 'Profile'
+}, {
+  path: '/resources/:id',
+  name: 'resource',
+  component: 'Resource'
 }]

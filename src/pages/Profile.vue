@@ -173,13 +173,13 @@ export default {
   components: {
     MainData,
     AvatarData,
-    PasswordChange,
+    PasswordChange
   },
 
   /**
    * @function
    * Перед сменой роутинга проверяется наличие изменений {@link profile}
-   * если изменения есть то активировать копонент {@link ChangesConfirm}
+   * если изменения есть то активировать компонент {@link ChangesConfirm}
    */
   beforeRouteLeave(to, from, next) {
     if (this.isChanged) {
@@ -191,8 +191,3 @@ export default {
   }
 };
 </script>
-
-<style lang="sass">
-.v-expansion-panel__header
-  padding: 16px
-</style>

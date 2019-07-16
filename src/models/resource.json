@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "slug": "Resource_1",
+  "title": "Resource 1",
+  "description": "New test resource 1",
+  "content": "",
+  "published": false,
+  "createdAt": "28.08.1990",
+  "layout": "base-layout",
+  "type": "base-resource",
+  "owner": "1",
+  "fields": [],
+  "children": [],
+  "parentId": ""
+}

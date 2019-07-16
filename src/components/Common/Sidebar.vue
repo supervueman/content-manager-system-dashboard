@@ -27,19 +27,19 @@
             template(v-slot:header)
               div Manager_1
             v-list
-              v-list-tile(to="/posts")
+              v-list-tile(to="/resources/1")
                 v-list-tile-action
                   v-icon(color="primary") library_books
                 v-list-tile-content
                   v-list-tile-title Новости
 
-              v-list-tile(to="/posts")
+              v-list-tile(to="/resources/2")
                 v-list-tile-action
                   v-icon(color="primary") library_books
                 v-list-tile-content
                   v-list-tile-title Товары
 
-              v-list-tile(to="/pages")
+              v-list-tile(to="/resources/3")
                 v-list-tile-action
                   v-icon(color="primary") library_books
                 v-list-tile-content

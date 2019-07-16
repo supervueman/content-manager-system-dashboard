@@ -1,6 +1,4 @@
-import {
-  profile
-} from '@/fakers/models';
+import profile from '@/models/profile.json';
 
 export default {
   namespaced: true,
