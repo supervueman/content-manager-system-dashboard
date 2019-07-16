@@ -98,7 +98,7 @@ import MainData from "@/components/Profile/MainData";
 import AvatarData from "@/components/Profile/AvatarData";
 import PasswordChange from "@/components/Profile/PasswordChange";
 // Libs
-import { required, minLength, email } from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 
 export default {
   name: "Profile",
