@@ -18,6 +18,7 @@
 import { validationMixin } from "vuelidate";
 import { required, minLength, sameAs, email } from "vuelidate/lib/validators";
 export default {
+  name: "CreateFolder",
   mixins: [validationMixin],
   validations: {
     folderName: { required, minLength: minLength(3) }

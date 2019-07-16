@@ -50,7 +50,7 @@
         v-list
           v-list-tile(to="/layouts")
             v-list-tile-action
-              v-icon(color="primary") playlist_add
+              v-icon(color="primary") layers
             v-list-tile-content
               v-list-tile-title Шаблоны
           v-list-tile(to="/additional-fields")

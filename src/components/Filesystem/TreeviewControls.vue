@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  name: "TreeviewControls",
   props: {
     currentFileType: {
       type: String,

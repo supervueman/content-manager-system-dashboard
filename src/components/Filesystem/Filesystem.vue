@@ -100,10 +100,10 @@
 // Components
 import ContextMenuList from "./ContextMenuList";
 import CreateFolder from "./CreateFolder";
-import RemoveConfirm from "./RemoveConfirm";
 import TreeviewControls from "./TreeviewControls";
 
 export default {
+  name: "FilesystemComponent",
   data: () => ({
     open: [],
     tree: [],
@@ -264,7 +264,6 @@ export default {
   components: {
     ContextMenuList,
     CreateFolder,
-    RemoveConfirm,
     TreeviewControls
   }
 };

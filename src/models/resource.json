@@ -11,7 +11,7 @@
     "title": "Базовый шаблон",
     "slug": "base"
   },
-  "owner": "1",
+  "managerId": "1",
   "fields": [],
   "children": [],
   "parentId": ""
