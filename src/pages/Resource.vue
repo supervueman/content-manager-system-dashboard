@@ -1,145 +1,158 @@
 <template lang="pug">
-  v-flex
-    .body-2.mb-5 Ресурс: {{resource.title}} 
-    v-layout.wrap.pt-5
-      v-flex.xs12.md7.pr-2
-        v-expansion-panel(v-model="panel" expand)
-          v-expansion-panel-content
-            template.px-2(v-slot:header)
-              div Общие данные
-            v-card.mb-3
-              v-card-text
-                v-layout.wrap
-                  v-flex.md12
-                    v-tooltip(top)
-                      template(v-slot:activator="{ on }")
-                        v-text-field(
-                          v-model="resource.title"
-                          label="Наименование:"
-                          v-on="on"
-                          required
-                          @input="$v.resource.title.$touch()"
-                          @blur="$v.resource.title.$touch()"
-                          :error-messages="titleErrors"
-                        )
-                      span title
+  v-layout
+    v-flex
+      .body-2.mb-5 Ресурс: {{resource.title}}
+      v-tabs(slot="extension" v-model="tab" grow)
+        v-tabs-slider(color="primary")
+        v-tab Общие данные
+        v-tab Дополнительные поля
+        v-tab Ресурсы
+        v-tabs-items
+          v-tab-item
+            v-layout.wrap.pt-4
+              v-flex.xs12.md7.pr-2
+                v-expansion-panel(v-model="panel" expand)
+                  v-expansion-panel-content
+                    template.px-2(v-slot:header)
+                      div Общие данные
+                    v-card.mb-3
+                      v-card-text
+                        v-layout.wrap
+                          v-flex.md12
+                            v-tooltip(top)
+                              template(v-slot:activator="{ on }")
+                                v-text-field(
+                                  v-model="resource.title"
+                                  label="Наименование:"
+                                  v-on="on"
+                                  required
+                                  @input="$v.resource.title.$touch()"
+                                  @blur="$v.resource.title.$touch()"
+                                  :error-messages="titleErrors"
+                                )
+                              span title
 
-                  v-flex.md12
-                    v-tooltip(top)
-                      template(v-slot:activator="{ on }")
-                        v-textarea(
-                          v-model="resource.description"
-                          label="Описание:"
-                          v-on="on"
-                          no-resize
+                          v-flex.md12
+                            v-tooltip(top)
+                              template(v-slot:activator="{ on }")
+                                v-textarea(
+                                  v-model="resource.description"
+                                  label="Описание:"
+                                  v-on="on"
+                                  no-resize
+                                )
+                              span description
+              v-flex.xs12.md5.pl-2
+                v-card.mb-3
+                  v-card-text
+                    v-layout.wrap
+                      v-flex.md12
+                        v-menu(
+                          ref="menu"
+                          v-model="menu"
+                          :close-on-content-click="false"
+                          :nudge-right="40"
+                          :return-value.sync="resource.createdAt"
+                          lazy
+                          transition="scale-transition"
+                          offset-y
+                          full-width
+                          max-width="290px"
+                          min-width="290px"
                         )
-                      span description
-      v-flex.xs12.md5.pl-2
-        v-card.mb-3
-          v-card-text
-            v-layout.wrap
-              v-flex.md12
-                v-menu(
-                  ref="menu"
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :nudge-right="40"
-                  :return-value.sync="resource.createdAt"
-                  lazy
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  max-width="290px"
-                  min-width="290px"
-                )
-                  template(v-slot:activator="{ on }")
-                    v-text-field(
-                      v-model="resource.createdAt"
-                      label="Дата публикации:"
-                      prepend-icon="event"
-                      readonly
-                      v-on="on"
-                    )
-                  v-date-picker(
-                    v-model="resource.createdAt"
-                    no-title
-                    scrollable
-                    color="primary"
-                  )
-              v-flex.md12
-                v-tooltip(top)
-                  template(v-slot:activator="{ on }")
-                    v-text-field(
-                      v-model="resource.slug"
-                      label="Псевдоним:"
-                      v-on="on"
-                      @input="$v.resource.slug.$touch()"
-                      @blur="$v.resource.slug.$touch()"
-                      :error-messages="slugErrors"
-                      required
-                    )
-                  span slug
-        v-card.mb-3
-          v-card-text
-            v-layout.wrap
-              v-flex.md12
-                v-tooltip(top)
-                  template(v-slot:activator="{ on }")
-                    v-select(
-                      :items="[{id: '1' ,slug: 'base', title: 'Базовый шаблон'}, {id: '2', slug: 'custom', title: 'Кастомный шаблон'}]"
-                      item-text="title"
-                      return-object
-                      label="Шаблон:"
-                      v-model="resource.layout"
-                      v-on="on"
-                      required
-                    )
-                  span layout
-              v-flex.md12
-                v-tooltip(top)
-                  template(v-slot:activator="{ on }")
-                    v-checkbox(
-                      v-model="resource.published"
-                      label="Опубликовать"
-                      color="primary"
-                      v-on="on"
-                    )
-                  span published
-    v-expansion-panel(v-model="panelDescription" expand)
-      v-expansion-panel-content
-        template.px-2(v-slot:header)
-          div Контент
-        v-card.mb-3
-          v-card-text
-            v-layout.wrap
-              v-flex.md12
-                Editor(v-model="resource.content")
-    v-card
-      v-card-actions
-        v-btn.ml-2(
-          color="primary"
-          v-if="managerAccess && resource.id === ''"
-          @click="create"
-        ) Создать
-        v-btn.ml-2(
-          color="primary"
-          v-if="resource.id !== '' && resource.id !== undefined"
-          @click="update"
-        ) Сохранить
-        v-btn.ml-2(
-          color="error"
-          v-if="resource.id !== undefined && resource.id !== ''"
-          @click="isRemoveDialog = true"
-        ) Удалить
-    v-dialog(
-      v-model="isRemoveDialog"
-      max-width="500px"
-    )
-      remove-confirm(
-        @remove="remove"
-        :isActive.sync="isRemoveDialog"
-        :name="resource.title"
+                          template(v-slot:activator="{ on }")
+                            v-text-field(
+                              v-model="resource.createdAt"
+                              label="Дата публикации:"
+                              prepend-icon="event"
+                              readonly
+                              v-on="on"
+                            )
+                          v-date-picker(
+                            v-model="resource.createdAt"
+                            no-title
+                            scrollable
+                            color="primary"
+                          )
+                      v-flex.md12
+                        v-tooltip(top)
+                          template(v-slot:activator="{ on }")
+                            v-text-field(
+                              v-model="resource.slug"
+                              label="Псевдоним:"
+                              v-on="on"
+                              @input="$v.resource.slug.$touch()"
+                              @blur="$v.resource.slug.$touch()"
+                              :error-messages="slugErrors"
+                              required
+                            )
+                          span slug
+                v-card.mb-3
+                  v-card-text
+                    v-layout.wrap
+                      v-flex.md12
+                        v-tooltip(top)
+                          template(v-slot:activator="{ on }")
+                            v-select(
+                              :items="[{id: '1' ,slug: 'base', title: 'Базовый шаблон'}, {id: '2', slug: 'custom', title: 'Кастомный шаблон'}]"
+                              item-text="title"
+                              return-object
+                              label="Шаблон:"
+                              v-model="resource.layout"
+                              v-on="on"
+                              required
+                            )
+                          span layout
+                      v-flex.md12
+                        v-tooltip(top)
+                          template(v-slot:activator="{ on }")
+                            v-checkbox(
+                              v-model="resource.published"
+                              label="Опубликовать"
+                              color="primary"
+                              v-on="on"
+                            )
+                          span published
+            v-expansion-panel(v-model="panelDescription" expand)
+              v-expansion-panel-content
+                template.px-2(v-slot:header)
+                  div Контент
+                v-card.mb-3
+                  v-card-text
+                    v-layout.wrap
+                      v-flex.md12
+                        Editor(v-model="resource.content")
+            v-card
+              v-card-actions
+                v-btn.ml-2(
+                  color="primary"
+                  v-if="managerAccess && resource.id === ''"
+                  @click="create"
+                ) Создать
+                v-btn.ml-2(
+                  color="primary"
+                  v-if="resource.id !== '' && resource.id !== undefined"
+                  @click="update"
+                ) Сохранить
+                v-btn.ml-2(
+                  color="error"
+                  v-if="resource.id !== undefined && resource.id !== ''"
+                  @click="isRemoveDialog = true"
+                ) Удалить
+          v-tab-item
+            v-layout.wrap.pt-4 Дополнительные поля
+          v-tab-item
+            v-layout.wrap.pt-4 Ресурсы
+
+      v-dialog(
+        v-model="isRemoveDialog"
+        max-width="500px"
       )
+        remove-confirm(
+          @remove="remove"
+          :isActive.sync="isRemoveDialog"
+          :name="resource.title"
+        )
 </template>
 
 <script>
@@ -170,7 +183,8 @@ export default {
       panelDescription: [true],
       paneName: "panel-resource-base-fields",
       menu: false,
-      isRemoveDialog: false
+      isRemoveDialog: false,
+      tab: null
     };
   },
 

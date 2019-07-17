@@ -1,22 +1,22 @@
 <template lang="pug">
-  v-app(light)
-    transition(name="fade")
-      notification(
-        v-if="notification.isNotification"
-        :type="notification.type"
-        :message="notification.message"
-      )
-    toolbar(
-      :profileId="profile.id"
-      :profileFirstname="profile.firstname"
-      :profileLastname="profile.lastname"
-      :profileAvatar="profile.avatar"
-    )
+	v-app(light)
+		transition(name="fade")
+			notification(
+				v-if="notification.isNotification"
+				:type="notification.type"
+				:message="notification.message"
+			)
+		toolbar(
+			:profileId="profile.id"
+			:profileFirstname="profile.firstname"
+			:profileLastname="profile.lastname"
+			:profileAvatar="profile.avatar"
+		)
 
-    sidebar(v-if="adminAccess || managerAccess")
-    v-content
-      v-container(fluid)
-        router-view
+		sidebar(v-if="adminAccess || managerAccess")
+		v-content
+			v-container(fluid)
+				router-view
 </template>
 
 <script>
@@ -45,5 +45,8 @@ export default {
 	transition: opacity .5s
 .fade-enter, .fade-leave-to
 	opacity: 0
+
+.v-expansion-panel__header
+	padding: 16px
 </style>
 
