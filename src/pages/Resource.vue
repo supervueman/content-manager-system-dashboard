@@ -142,7 +142,9 @@
           v-tab-item
             v-layout.wrap.pt-4 Дополнительные поля
           v-tab-item
-            v-layout.wrap.pt-4 Ресурсы
+            v-layout.wrap.pt-4
+              v-flex
+                resources
 
       v-dialog(
         v-model="isRemoveDialog"
@@ -163,6 +165,7 @@ import { validationMixin } from "vuelidate";
 
 // Components
 import Editor from "@/components/Editor/VueEditor";
+import Resources from "@/components/Resource/Resources";
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
@@ -231,11 +234,12 @@ export default {
   },
 
   components: {
-    Editor
+    Editor,
+    Resources
   },
 
   async mounted() {
-    await this.$store.dispatch("resource/fetchResource");
+    await this.$store.dispatch("resource/fetchResource", this.$route.params.id);
   }
 };
 </script>

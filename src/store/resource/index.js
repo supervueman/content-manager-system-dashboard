@@ -3,11 +3,15 @@ import resource from '@/models/resource.json';
 export default {
   namespaced: true,
   state: {
-    resource: {}
+    resource: {},
+    resourceChilds: [],
   },
   mutations: {
     setResource(state, payload) {
       state.resource = payload;
+    },
+    setResourceChilds(state, payload) {
+      state.resourceChilds = payload;
     }
   },
   actions: {
@@ -79,6 +83,35 @@ export default {
       }, 1500);
     },
 
+    /**
+     * @function fetchResourceChilds
+     * @async
+     * @param {Object} payload {resource.id, skip, limit}
+     * Фу
+     */
+    async fetchResourceChilds({
+      commit
+    }, payload) {
+      commit('setResourceChilds', [{
+        id: "2",
+        slug: "Resource_1",
+        title: "Resource 2",
+        description: "New test resource 1",
+        content: "New test resource 1",
+        published: false,
+        createdAt: "2019-07-16",
+        layout: {
+          id: "1",
+          title: "Базовый шаблон",
+          slug: "base"
+        },
+        managerId: "1",
+        fields: [],
+        children: [],
+        parentId: ""
+      }]);
+    },
+
     setResource({
       commit
     }, payload) {
@@ -94,6 +127,9 @@ export default {
   getters: {
     getResource(state) {
       return state.resource;
+    },
+    getResourceChilds(state) {
+      return state.resourceChilds;
     }
   }
 };
