@@ -2,7 +2,7 @@
   v-flex(v-if="managerAccess")
     .body-2.mb-5 Создание ресурса
       v-layout.wrap.pt-5
-        resource-create()
+        resource-create
 </template>
 
 <script>

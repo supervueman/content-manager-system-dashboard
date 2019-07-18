@@ -165,7 +165,7 @@ export default {
         createdAt: "",
         fields: [],
         children: [],
-        parentId: this.$route.query.id || "",
+        parentId: this.$route.params.id || "",
         layout: "",
         managerId: ""
       }

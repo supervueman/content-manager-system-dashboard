@@ -17,7 +17,9 @@
       template(v-slot:items="props")
         td.text-xs-left
           router-link(:to="`/resources/${props.item.id}`") {{ props.item.title }}
-        td.text-xs-left {{ props.item.published }}
+        td.text-xs-left 
+          div(v-if="props.item.published") Опубликован
+          div(v-else) Не опубликован
         td.text-xs-left {{ props.item.layout.title }}
         td.text-xs-left {{ props.item.createdAt }}
         td.text-xs-right
