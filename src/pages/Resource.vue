@@ -126,11 +126,6 @@
               v-card-actions
                 v-btn.ml-2(
                   color="primary"
-                  v-if="managerAccess && resource.id === ''"
-                  @click="create"
-                ) Создать
-                v-btn.ml-2(
-                  color="primary"
                   v-if="resource.id !== '' && resource.id !== undefined"
                   @click="update"
                 ) Сохранить
@@ -184,7 +179,7 @@ export default {
   data() {
     return {
       panelDescription: [true],
-      paneName: "panel-resource-base-fields",
+      panelName: "panel-resource-base-fields",
       menu: false,
       isRemoveDialog: false,
       tab: null
@@ -216,12 +211,6 @@ export default {
   },
 
   methods: {
-    create() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        this.$store.dispatch("resource/createResource", this.resource);
-      }
-    },
     update() {
       this.$v.$touch();
       if (!this.$v.$error) {

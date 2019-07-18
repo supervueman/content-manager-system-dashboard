@@ -2,7 +2,12 @@
   v-flex
     v-toolbar(flat color="white")
       v-spacer
-      v-btn(color="primary" dark) Создать ресурс
+      v-btn(
+        color="primary"
+        dark
+        @click="isResourceCreateDialog = true"
+        v-if="managerAccess"
+      ) Создать ресурс
     v-data-table(
       :headers="headers"
       :items="resourceChilds"
@@ -35,11 +40,26 @@
         :isActive.sync="isRemoveDialog"
         :name="removeResource.title"
       )
+    v-dialog(
+      v-model="isResourceCreateDialog"
+    )
+      v-card
+        v-card-text
+          resource-create(
+            @close="isResourceCreateDialog = false"
+          )
 </template>
 
 <script>
+// Components
+import ResourceCreate from "./ResourceCreate";
+
+// Mixins
+import accessMixin from "@/mixins/accessMixin";
+
 export default {
   name: "ResourceChilds",
+  mixins: [accessMixin],
   data() {
     return {
       headers: [
@@ -58,6 +78,7 @@ export default {
       limit: 5,
       skip: 5,
       isRemoveDialog: false,
+      isResourceCreateDialog: false,
       removeResource: {}
     };
   },
@@ -90,6 +111,10 @@ export default {
       this.removeResource = resource;
       this.isRemoveDialog = true;
     }
+  },
+
+  components: {
+    ResourceCreate
   },
 
   async mounted() {
