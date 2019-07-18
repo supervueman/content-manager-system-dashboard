@@ -19,7 +19,13 @@
       v-tab-item
         v-toolbar(flat height="50")
           v-tooltip(top v-if="managerAccess")
-            v-btn(slot="activator" flat icon color="primary")
+            v-btn(
+              slot="activator"
+              flat
+              icon
+              color="primary"
+              to="/resource-create"
+            )
               v-icon add_circle_outline
             span Создать ресурс
         v-expansion-panel(v-model="panel" expand)

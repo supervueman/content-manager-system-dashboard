@@ -121,7 +121,10 @@
             v-if="managerAccess"
             @click="create"
           ) Создать
-          v-btn.ml-2(@click="$emit('close')") Отмена
+          v-btn.ml-2(
+            @click="$emit('close')"
+            v-if="resource.parentId !== '' && resource.parentId !== undefined"
+          ) Отмена
 </template>
 
 <script>

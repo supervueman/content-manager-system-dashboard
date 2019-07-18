@@ -15,6 +15,10 @@ export default [{
   name: 'resource',
   component: 'Resource'
 }, {
+  path: '/resource-create',
+  name: 'resource-create',
+  component: 'ResourceCreate'
+}, {
   path: '/filesystem',
   name: 'filesystem',
   component: 'Filesystem'
