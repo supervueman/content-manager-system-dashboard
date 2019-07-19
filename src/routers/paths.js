@@ -38,4 +38,8 @@ export default [{
   path: '/additional-fields/:id',
   name: 'additional-field',
   component: 'AdditionalField'
+}, {
+  path: '/users',
+  name: 'users',
+  component: 'Users'
 }]

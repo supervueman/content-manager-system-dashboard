@@ -1,8 +1,9 @@
 <template lang="pug">
   v-toolbar.primary(app dark)
-    //- v-toolbar-side-icon.hidden-sm-and-up(@click.stop="drawer = !drawer")
     v-toolbar-title
       //- img(:src="`${imgFolderBasePath}/logo.svg`" class="toolbar-logo")
+    v-toolbar-items.hidden-xs-and-down
+      v-btn(flat to="/users" v-if="adminAccess") Пользователи
     v-spacer
     v-toolbar-items.hidden-xs-and-down
       v-btn(flat to="/login" v-if="!(adminAccess || managerAccess)") Войти

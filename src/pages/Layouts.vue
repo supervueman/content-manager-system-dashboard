@@ -20,7 +20,6 @@
           template(v-slot:items="props")
             td.text-xs-left
               router-link(:to="`/layouts/${props.item.id}`") {{ props.item.title }}
-            td.text-xs-left {{ props.item.createdAt }}
             td.text-xs-right
               v-btn(
                 flat
@@ -64,7 +63,6 @@ export default {
           text: "Наименование",
           value: "title"
         },
-        { text: "Дата создания", value: "createdAt" },
         { text: "", sortable: false }
       ],
       pagination: {
