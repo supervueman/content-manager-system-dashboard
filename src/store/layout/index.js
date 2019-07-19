@@ -3,11 +3,15 @@ import layout from '@/models/layout.json';
 export default {
   namespaced: true,
   state: {
-    layout: {}
+    layout: {},
+    layouts: []
   },
   mutations: {
     setLayout(state, payload) {
       state.layout = payload;
+    },
+    setLayouts(state, payload) {
+      state.layouts = payload;
     }
   },
   actions: {
@@ -80,6 +84,17 @@ export default {
       }, 1500);
     },
 
+    async fetchLayouts({
+      commit
+    }, payload) {
+      commit('setLayouts', [{
+        id: "1",
+        slug: "base",
+        title: "Базовый шаблон",
+        fields: []
+      }]);
+    },
+
     setLayout({
       commit
     }, payload) {
@@ -95,6 +110,9 @@ export default {
   getters: {
     getLayout(state) {
       return state.layout;
+    },
+    getLayouts(state) {
+      return state.layouts;
     }
   }
 };

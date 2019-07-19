@@ -14,7 +14,6 @@
                     v-text-field(
                       v-model="layout.slug"
                       label="Псевдоним:"
-                      v-on="on"
                       required
                       @input="$v.layout.slug.$touch()"
                       @blur="$v.layout.slug.$touch()"
@@ -23,7 +22,6 @@
                     v-text-field(
                       v-model="layout.title"
                       label="Наименование:"
-                      v-on="on"
                       required
                       @input="$v.layout.title.$touch()"
                       @blur="$v.layout.title.$touch()"
@@ -31,11 +29,6 @@
                     )
         v-card(v-if="adminAccess")
           v-card-actions
-            v-btn.ml-2(
-              color="primary"
-              v-if="layout.id === '' || layout.id === undefined"
-              @click="create"
-            ) Создать
             v-btn.ml-2(
               color="primary"
               v-if="layout.id !== undefined && layout.id !== ''"
@@ -112,12 +105,6 @@ export default {
   },
 
   methods: {
-    async create() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        await this.$store.dispatch("layout/createLayout", this.layout);
-      }
-    },
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {

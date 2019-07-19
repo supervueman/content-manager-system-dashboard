@@ -9,7 +9,7 @@
   "instagram": "",
   "vkontakte": "",
   "avatar": "avatar.jpg",
-  "role": "manager",
-  "rang": 1,
+  "role": "admin",
+  "rang": 9999,
   "slug": "admin"
 }
