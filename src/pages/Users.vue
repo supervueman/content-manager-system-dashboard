@@ -8,9 +8,9 @@
               v-spacer
               v-btn(
                 color="primary"
-                to="/user-create"
                 dark
                 v-if="adminAccess"
+                @click="isUserCreateDialog = true"
               ) Создать пользователя
             v-data-table(
               :headers="headers"
@@ -60,6 +60,14 @@
             :isActive.sync="isRemoveDialog"
             :name="`${removeUser.lastname} ${removeUser.firstname}`"
           )
+        v-dialog(
+          v-model="isUserCreateDialog"
+        )
+          v-card
+            v-card-text
+              user-create(
+                @close="isUserCreateDialog = false"
+              )
 </template>
 
 <script>
@@ -68,6 +76,9 @@ import accessMixin from "@/mixins/accessMixin";
 
 // Config
 import { imgFolderBasePath } from "@/config";
+
+// Components
+import UserCreate from "@/components/User/UserCreate";
 
 export default {
   name: "Users",
@@ -91,6 +102,7 @@ export default {
       limit: 5,
       skip: 5,
       isRemoveDialog: false,
+      isUserCreateDialog: false,
       removeUser: {},
       imgFolderBasePath
     };
@@ -121,6 +133,10 @@ export default {
       this.removeUser = user;
       this.isRemoveDialog = true;
     }
+  },
+
+  components: {
+    UserCreate
   },
 
   async mounted() {
