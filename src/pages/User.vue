@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex
+  v-flex(v-if="adminAccess")
     .body-2.mb-5 Пользователь: {{profile.slug}}
     v-layout.wrap.pt-5
       v-flex.xs12.md7.pr-2

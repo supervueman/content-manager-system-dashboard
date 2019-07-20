@@ -9,7 +9,7 @@ import authenticate from './authenticate';
 import resource from './resource';
 import filesystem from './filesystem';
 import layout from './layout';
-import additionalField from './additional-field';
+import field from './field';
 import user from './user';
 
 export const store = new Vuex.Store({
@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
     resource,
     filesystem,
     layout,
-    additionalField,
+    field,
     user
   }
 });

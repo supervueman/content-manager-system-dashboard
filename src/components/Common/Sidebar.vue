@@ -59,7 +59,7 @@
               v-icon(color="primary") layers
             v-list-tile-content
               v-list-tile-title Шаблоны
-          v-list-tile(to="/additional-fields")
+          v-list-tile(to="/fields")
             v-list-tile-action
               v-icon(color="primary") playlist_add
             v-list-tile-content

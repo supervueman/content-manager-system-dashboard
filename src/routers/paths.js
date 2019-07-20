@@ -35,9 +35,17 @@ export default [{
   name: 'layouts',
   component: 'Layouts'
 }, {
-  path: '/additional-fields/:id',
-  name: 'additional-field',
-  component: 'AdditionalField'
+  path: '/fields',
+  name: 'fields',
+  component: 'Fields'
+}, {
+  path: '/fields/:id',
+  name: 'field',
+  component: 'Field'
+}, {
+  path: '/field-create',
+  name: 'field-create',
+  component: 'FieldCreate'
 }, {
   path: '/users',
   name: 'users',
