@@ -25,7 +25,21 @@ export default {
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setUser', user);
+        commit('setUser', {
+          id: "1",
+          firstname: "Rinat",
+          lastname: "Davlikamov",
+          patronymic: "",
+          email: "supervueman@gmail.com",
+          phone: "9370780830",
+          facebook: "",
+          instagram: "",
+          vkontakte: "",
+          avatar: "avatar.jpg",
+          role: "admin",
+          rang: 9999,
+          slug: "admin"
+        });
       }, 1500);
     },
 
