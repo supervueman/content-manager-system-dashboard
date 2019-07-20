@@ -122,24 +122,29 @@
                     v-layout.wrap
                       v-flex.md12
                         Editor(v-model="resource.content")
-            v-card
-              v-card-actions
-                v-btn.ml-2(
-                  color="primary"
-                  v-if="resource.id !== '' && resource.id !== undefined"
-                  @click="update"
-                ) Сохранить
-                v-btn.ml-2(
-                  color="error"
-                  v-if="resource.id !== undefined && resource.id !== ''"
-                  @click="isRemoveDialog = true"
-                ) Удалить
           v-tab-item
-            v-layout.wrap.pt-4 Дополнительные поля
+            v-layout.wrap.pt-4
+              v-card
+                v-card-text
+                  fields
           v-tab-item
             v-layout.wrap.pt-4
               v-flex
-                resources
+                v-card
+                  v-card-text
+                    resources
+      v-card
+        v-card-actions
+          v-btn.ml-2(
+            color="primary"
+            v-if="resource.id !== '' && resource.id !== undefined"
+            @click="update"
+          ) Сохранить
+          v-btn.ml-2(
+            color="error"
+            v-if="resource.id !== undefined && resource.id !== ''"
+            @click="isRemoveDialog = true"
+          ) Удалить
 
       v-dialog(
         v-model="isRemoveDialog"
@@ -161,6 +166,8 @@ import { validationMixin } from "vuelidate";
 // Components
 import Editor from "@/components/Editor/VueEditor";
 import Resources from "@/components/Resource/Resources";
+import Fields from "@/components/Resource/Fields";
+
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
@@ -224,7 +231,8 @@ export default {
 
   components: {
     Editor,
-    Resources
+    Resources,
+    Fields
   },
 
   async mounted() {

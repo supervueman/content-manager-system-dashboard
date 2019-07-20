@@ -2,7 +2,7 @@
   "id": "",
   "slug": "",
   "title": "",
-  "layoutId": "",
+  "layouts": [],
   "fieldType": "text",
   "schema": "",
   "defaultValue": ""

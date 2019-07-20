@@ -4,6 +4,122 @@ export default {
   namespaced: true,
   state: {
     resource: {},
+    layout: {},
+    fields: {
+      text: {
+        value: 'Text field',
+        interface: {
+          id: '1',
+            slug: 'text',
+            title: 'Текстовое поле',
+            fieldType: 'text',
+            shcema: '',
+            defaultValue: 'Текстовое поле'
+        }
+      },
+      textarea: {
+        value: 'Textarea field',
+        interface: {
+          id: '2',
+            slug: 'textarea',
+            title: 'Текстовая область',
+            fieldType: 'textarea',
+            shcema: '',
+            defaultValue: 'Текстовая область'
+        }
+      },
+      editor: {
+        value: 'Texteditor field',
+        interface: {
+          id: '3',
+            slug: 'editor',
+            title: 'Текстовый редактор',
+            fieldType: 'editor',
+            shcema: '',
+            defaultValue: 'Текстовый редактор'
+        },
+      },
+      image: {
+        value: 'Image',
+        interface: {
+          id: '4',
+            slug: 'image',
+            title: 'Изображение',
+            fieldType: 'image',
+            shcema: '',
+            defaultValue: 'Изображение'
+        }
+      },
+      select: {
+        value: 'Item 1',
+        interface: {
+          id: '5',
+            slug: 'select',
+            title: 'Селект',
+            fieldType: 'select',
+            shcema: '',
+            defaultValue: ['Item 1', 'Item 2', 'Item 3']
+        },
+      },
+      migx: {
+        value: [{
+          title: 'Title',
+          image: '/avatar.jpg'
+        }],
+        interface: {
+          id: '6',
+            slug: 'migx',
+            title: 'Migx',
+            fieldType: 'migx',
+            shcema: '{"title": "{"type": "text"}", "image": "{"type": "image"}"}',
+            defaultValue: 'Migx'
+        },
+      },
+      date: {
+        value: '2019-07-20',
+        interface: {
+          id: '7',
+            slug: 'date',
+            title: 'Дата',
+            fieldType: 'date',
+            shcema: '',
+            defaultValue: 'Дата'
+        }
+      },
+      time: {
+        value: '2019-07-20',
+        interface: {
+          id: '8',
+            slug: 'time',
+            title: 'Время',
+            fieldType: 'time',
+            shcema: '',
+            defaultValue: 'Время'
+        }
+      },
+      colorpicker: {
+        value: '#dfv45f',
+        interface: {
+          id: '9',
+            slug: 'colorpicker',
+            title: 'Колорпикер',
+            fieldType: 'colorpicker',
+            shcema: '',
+            defaultValue: 'Колорпикер'
+        }
+      },
+      checkbox: {
+        value: false,
+        interface: {
+          id: '10',
+            slug: 'checkbox',
+            title: 'Чекбокс',
+            fieldType: 'checkbox',
+            shcema: '',
+            defaultValue: 'Чекбокс'
+        }
+      }
+    },
     resourceChilds: [],
   },
   mutations: {
@@ -12,6 +128,12 @@ export default {
     },
     setResourceChilds(state, payload) {
       state.resourceChilds = payload;
+    },
+    setLayout(state, payload) {
+      state.layout = payload;
+    },
+    setFields(state, payload) {
+      state.fields = payload;
     }
   },
   actions: {
@@ -130,6 +252,12 @@ export default {
     },
     getResourceChilds(state) {
       return state.resourceChilds;
+    },
+    getLayout(state) {
+      return state.layout;
+    },
+    getFields(state) {
+      return state.fields;
     }
   }
 };

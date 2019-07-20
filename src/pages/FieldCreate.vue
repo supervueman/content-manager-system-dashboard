@@ -27,6 +27,7 @@
                         required
                       )
                       v-textarea(
+                        v-if="field.fieldType === 'array'"
                         v-model="field.schema"
                         label="Схема:"
                         placeholder="Строка или JSON"
@@ -64,7 +65,7 @@
                 required
               )
               v-select(
-                :items="['text', 'textarea', 'editor', 'image', 'select', 'radio', 'date', 'time', 'colorpicker', 'checkbox']"
+                :items="['text', 'textarea', 'editor', 'image', 'select', 'array', 'radio', 'date', 'time', 'colorpicker', 'checkbox']"
                 label="Тип поля:"
                 v-model="field.fieldType"
                 required

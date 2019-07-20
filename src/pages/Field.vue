@@ -27,6 +27,7 @@
                       required
                     )
                     v-textarea(
+                      v-if="field.fieldType === 'array'"
                       v-model="field.schema"
                       label="Схема:"
                       placeholder="Строка или JSON"
@@ -38,12 +39,10 @@
               v-card-actions
                 v-btn.ml-2(
                   color="primary"
-                  v-if="field.id !== undefined && field.id !== ''"
                   @click="update"
                 ) Сохранить
                 v-btn.ml-2(
                   color="error"
-                  v-if="field.id !== undefined && field.id !== ''"
                   @click="isRemoveDialog = true"
                 ) Удалить
 
@@ -69,7 +68,7 @@
               required
             )
             v-select(
-              :items="['text', 'textarea', 'editor', 'image', 'select', 'radio', 'date', 'time', 'colorpicker', 'checkbox']"
+              :items="['text', 'textarea', 'editor', 'image', 'select', 'array', 'radio', 'date', 'time', 'colorpicker', 'checkbox']"
               label="Тип поля:"
               v-model="field.fieldType"
               required
