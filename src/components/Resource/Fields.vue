@@ -12,6 +12,7 @@
             v-text-field(
               v-model="field.value"
             )
+
           //- Textarea field
           v-flex(v-else-if="field.interface.fieldType === 'textarea'")
             v-tooltip(left)
@@ -30,6 +31,17 @@
               span {{field.interface.slug}}
             editor(
               v-model="field.value"
+            )
+
+          //- Image field
+          v-flex(v-else-if="field.interface.fieldType === 'image'")
+            v-tooltip(left)
+              template(v-slot:activator="{ on }")
+                div.mb-3(v-on="on") {{field.interface.title}}
+              span {{field.interface.slug}}
+            image-field(
+              :path.sync="field.value"
+              @selectFile="field.value = $event"
             )
 
           //- Select field
@@ -70,7 +82,6 @@
               template(v-slot:activator="{ on }")
                 v-text-field(
                   v-model="field.value"
-                  label="Дата публикации:"
                   prepend-icon="event"
                   readonly
                   v-on="on"
@@ -102,7 +113,6 @@
               template(v-slot:activator="{ on }")
                 v-text-field(
                   v-model="field.value"
-                  label="Время:"
                   prepend-icon="event"
                   readonly
                   v-on="on"
@@ -132,6 +142,12 @@ export default {
   computed: {
     fields() {
       return this.$store.getters["resource/getFields"];
+    }
+  },
+
+  methods: {
+    selectFile(file) {
+      console.log(file);
     }
   },
 

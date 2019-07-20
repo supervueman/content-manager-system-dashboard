@@ -40,7 +40,7 @@ export default {
         },
       },
       image: {
-        value: 'Image',
+        value: 'files/image-1.jpg',
         interface: {
           id: '4',
             slug: 'image',

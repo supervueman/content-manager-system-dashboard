@@ -39,10 +39,12 @@
               v-card-actions
                 v-btn.ml-2(
                   color="primary"
+                  v-if="field.id !== undefined && field.id !== ''"
                   @click="update"
                 ) Сохранить
                 v-btn.ml-2(
                   color="error"
+                  v-if="field.id !== undefined && field.id !== ''"
                   @click="isRemoveDialog = true"
                 ) Удалить
 
