@@ -2,43 +2,54 @@
   v-flex(v-if="adminAccess")
     .body-2.mb-5 Шаблон: {{layout.title}}
     v-layout.wrap.pt-5
-      v-flex.xs12.md7.pr-2
-        v-expansion-panel(v-model="panel" expand)
-          v-expansion-panel-content
-            template.px-2(v-slot:header)
-              div Общие данные
-            v-card.mb-3
-              v-card-text
-                v-layout.wrap
-                  v-flex.md12
-                    v-text-field(
-                      v-model="layout.slug"
-                      label="Псевдоним:"
-                      required
-                      @input="$v.layout.slug.$touch()"
-                      @blur="$v.layout.slug.$touch()"
-                      :error-messages="slugErrors"
-                    )
-                    v-text-field(
-                      v-model="layout.title"
-                      label="Наименование:"
-                      required
-                      @input="$v.layout.title.$touch()"
-                      @blur="$v.layout.title.$touch()"
-                      :error-messages="titleErrors"
-                    )
-        v-card(v-if="adminAccess")
-          v-card-actions
-            v-btn.ml-2(
-              color="primary"
-              v-if="layout.id !== undefined && layout.id !== ''"
-              @click="update"
-            ) Сохранить
-            v-btn.ml-2(
-              color="error"
-              v-if="layout.id !== undefined && layout.id !== ''"
-              @click="isRemoveDialog = true"
-            ) Удалить
+      v-flex
+        v-tabs(slot="extension" v-model="tab" grow)
+          v-tabs-slider(color="primary")
+          v-tab Общие данные
+          v-tab Дополнительные поля
+          v-tabs-items
+            v-tab-item
+              v-flex.xs12.md12.pt-4
+                v-expansion-panel(v-model="panel" expand)
+                  v-expansion-panel-content
+                    template.px-2(v-slot:header)
+                      div Общие данные
+                    v-card.mb-3
+                      v-card-text
+                        v-layout.wrap
+                          v-flex.md12
+                            v-text-field(
+                              v-model="layout.slug"
+                              label="Псевдоним:"
+                              required
+                              @input="$v.layout.slug.$touch()"
+                              @blur="$v.layout.slug.$touch()"
+                              :error-messages="slugErrors"
+                            )
+                            v-text-field(
+                              v-model="layout.title"
+                              label="Наименование:"
+                              required
+                              @input="$v.layout.title.$touch()"
+                              @blur="$v.layout.title.$touch()"
+                              :error-messages="titleErrors"
+                            )
+            v-tab-item
+              v-flex.pt-4
+                v-card
+                  fields
+    v-card(v-if="adminAccess")
+      v-card-actions
+        v-btn.ml-2(
+          color="primary"
+          v-if="layout.id !== undefined && layout.id !== ''"
+          @click="update"
+        ) Сохранить
+        v-btn.ml-2(
+          color="error"
+          v-if="layout.id !== undefined && layout.id !== ''"
+          @click="isRemoveDialog = true"
+        ) Удалить
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -55,6 +66,9 @@
 import accessMixin from "@/mixins/accessMixin";
 import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
+
+// Comnponents
+import Fields from "@/components/Layout/Fields";
 
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
@@ -76,7 +90,8 @@ export default {
     return {
       panelName: "panel-layout-base-data",
       menu: false,
-      isRemoveDialog: false
+      isRemoveDialog: false,
+      tab: null
     };
   },
 
@@ -114,6 +129,10 @@ export default {
     async remove() {
       await this.$store.dispatch("layout/removeLayout", this.layout.id);
     }
+  },
+
+  components: {
+    Fields
   },
 
   async mounted() {
