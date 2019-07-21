@@ -59,9 +59,10 @@
                 item-text="title"
                 item-value="id"
                 label="Шаблон:"
-                v-model="field.layoutId"
+                v-model="field.layouts"
                 :error-messages="layoutErrors"
-                @blur="$v.field.layoutId.$touch()"
+                @blur="$v.field.layouts.$touch()"
+                multiple
                 required
               )
               v-select(
@@ -91,7 +92,7 @@ export default {
     field: {
       slug: { required, alpha, minLength: minLength(3) },
       title: { required, minLength: minLength(3) },
-      layoutId: { required }
+      layouts: { required }
     }
   },
 
@@ -130,8 +131,8 @@ export default {
     },
     layoutErrors() {
       const errors = [];
-      if (!this.$v.field.layoutId.$dirty) return errors;
-      !this.$v.field.layoutId.required && errors.push("Обязательное поле");
+      if (!this.$v.field.layouts.$dirty) return errors;
+      !this.$v.field.layouts.required && errors.push("Обязательное поле");
       return errors;
     }
   },
