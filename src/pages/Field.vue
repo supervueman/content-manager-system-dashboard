@@ -71,7 +71,7 @@
               required
             )
             v-select(
-              :items="['text', 'textarea', 'editor', 'image', 'select', 'array', 'radio', 'date', 'time', 'colorpicker', 'checkbox']"
+              :items="['text', 'textarea', 'editor', 'image', 'select', 'migx', 'radio', 'date', 'time', 'colorpicker', 'checkbox']"
               label="Тип поля:"
               v-model="field.fieldType"
               required
