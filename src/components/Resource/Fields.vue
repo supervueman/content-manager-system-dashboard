@@ -61,6 +61,13 @@
               template(v-slot:activator="{ on }")
                 div(v-on="on") {{field.interface.title}}
               span {{field.interface.slug}}
+            migx-field(
+              :field="field.value"
+              :schema="field.interface.schema"
+              @create="field.value.push($event)"
+              @update="field.value[$event.index] = $event.item"
+              @remove="field.value.splice($event, 1)"
+            )
 
           //- Date field
           v-flex(v-else-if="field.interface.fieldType === 'date'")
@@ -129,6 +136,7 @@
                 div(v-on="on") {{field.interface.title}}
               span {{field.interface.slug}}
             v-checkbox(
+              color="primary"
               v-model="field.value"
             )
 </template>
@@ -136,6 +144,7 @@
 <script>
 // Components
 import Editor from "@/components/Editor/VueEditor";
+import MigxField from "@/components/Common/Migx/MigxField";
 
 export default {
   name: "ResourceFields",
@@ -145,14 +154,9 @@ export default {
     }
   },
 
-  methods: {
-    selectFile(file) {
-      console.log(file);
-    }
-  },
-
   components: {
-    Editor
+    Editor,
+    MigxField
   }
 };
 </script>

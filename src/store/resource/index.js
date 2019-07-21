@@ -13,7 +13,7 @@ export default {
             slug: 'text',
             title: 'Текстовое поле',
             fieldType: 'text',
-            shcema: '',
+            schema: '',
             defaultValue: 'Текстовое поле'
         }
       },
@@ -24,7 +24,7 @@ export default {
             slug: 'textarea',
             title: 'Текстовая область',
             fieldType: 'textarea',
-            shcema: '',
+            schema: '',
             defaultValue: 'Текстовая область'
         }
       },
@@ -35,7 +35,7 @@ export default {
             slug: 'editor',
             title: 'Текстовый редактор',
             fieldType: 'editor',
-            shcema: '',
+            schema: '',
             defaultValue: 'Текстовый редактор'
         },
       },
@@ -46,7 +46,7 @@ export default {
             slug: 'image',
             title: 'Изображение',
             fieldType: 'image',
-            shcema: '',
+            schema: '',
             defaultValue: 'Изображение'
         }
       },
@@ -57,21 +57,62 @@ export default {
             slug: 'select',
             title: 'Селект',
             fieldType: 'select',
-            shcema: '',
+            schema: '',
             defaultValue: ['Item 1', 'Item 2', 'Item 3']
         },
       },
       migx: {
         value: [{
-          title: 'Title',
-          image: '/avatar.jpg'
+          text: {
+            value: 'Text field',
+            interface: {
+              id: '1',
+                slug: 'text',
+                title: 'Заголовок',
+                fieldType: 'text',
+                defaultValue: 'Текстовое поле'
+            }
+          },
+          image: {
+            value: 'files/image-1.jpg',
+            interface: {
+              id: '4',
+                slug: 'image',
+                title: 'Изображение',
+                fieldType: 'image',
+                defaultValue: 'Изображение'
+            }
+          },
+        }, {
+          text: {
+            value: 'Text field',
+            interface: {
+              id: '1',
+                slug: 'text',
+                title: 'Заголовок',
+                fieldType: 'text',
+                schema: '',
+                defaultValue: 'Текстовое поле'
+            }
+          },
+          image: {
+            value: 'files/image-2.jpg',
+            interface: {
+              id: '4',
+                slug: 'image',
+                title: 'Изображение',
+                fieldType: 'image',
+                schema: '',
+                defaultValue: 'Изображение'
+            }
+          },
         }],
         interface: {
           id: '6',
             slug: 'migx',
             title: 'Migx',
             fieldType: 'migx',
-            shcema: '{"title": "{"type": "text"}", "image": "{"type": "image"}"}',
+            schema: '{"title": {"title": "Заголовок", "fieldType": "text"}, "image": {"title": "Изображение", "fieldType": "image"}}',
             defaultValue: 'Migx'
         },
       },
@@ -82,7 +123,7 @@ export default {
             slug: 'date',
             title: 'Дата',
             fieldType: 'date',
-            shcema: '',
+            sschemahcema: '',
             defaultValue: 'Дата'
         }
       },
@@ -93,7 +134,7 @@ export default {
             slug: 'time',
             title: 'Время',
             fieldType: 'time',
-            shcema: '',
+            schema: '',
             defaultValue: 'Время'
         }
       },
@@ -104,7 +145,7 @@ export default {
             slug: 'colorpicker',
             title: 'Колорпикер',
             fieldType: 'colorpicker',
-            shcema: '',
+            schema: '',
             defaultValue: 'Колорпикер'
         }
       },
@@ -115,7 +156,7 @@ export default {
             slug: 'checkbox',
             title: 'Чекбокс',
             fieldType: 'checkbox',
-            shcema: '',
+            schema: '',
             defaultValue: 'Чекбокс'
         }
       }
