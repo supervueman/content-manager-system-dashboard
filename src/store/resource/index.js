@@ -83,6 +83,17 @@ export default {
                 defaultValue: 'Изображение'
             }
           },
+          date: {
+            value: '2019-07-20',
+            interface: {
+              id: '7',
+                slug: 'date',
+                title: 'Дата',
+                fieldType: 'date',
+                sschemahcema: '',
+                defaultValue: 'Дата'
+            }
+          },
         }, {
           text: {
             value: 'Text field',
@@ -106,13 +117,24 @@ export default {
                 defaultValue: 'Изображение'
             }
           },
+          date: {
+            value: '2019-07-20',
+            interface: {
+              id: '7',
+                slug: 'date',
+                title: 'Дата',
+                fieldType: 'date',
+                sschemahcema: '',
+                defaultValue: 'Дата'
+            }
+          },
         }],
         interface: {
           id: '6',
             slug: 'migx',
             title: 'Migx',
             fieldType: 'migx',
-            schema: '{"title": {"title": "Заголовок", "fieldType": "text"}, "image": {"title": "Изображение", "fieldType": "image"}}',
+            schema: '{"title": {"title": "Заголовок", "fieldType": "text"}, "image": {"title": "Изображение", "fieldType": "image"}, "date": {"title": "Дата", "fieldType": "date"}}',
             defaultValue: 'Migx'
         },
       },
