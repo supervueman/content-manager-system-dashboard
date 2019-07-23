@@ -30,7 +30,9 @@
                 div.mb-3(v-on="on") {{field.interface.title}}
               span {{field.interface.slug}}
             editor(
-              v-model="field.value"
+              v-if="field.value"
+              :content="field.value"
+              @update="field.value = $event()"
             )
 
           //- Image field
@@ -143,7 +145,6 @@
 
 <script>
 // Components
-import Editor from "@/components/Editor/VueEditor";
 import MigxField from "@/components/Common/Migx/MigxField";
 
 export default {
@@ -155,7 +156,6 @@ export default {
   },
 
   components: {
-    Editor,
     MigxField
   }
 };

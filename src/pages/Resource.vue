@@ -121,7 +121,11 @@
                   v-card-text
                     v-layout.wrap
                       v-flex.md12
-                        Editor(v-model="resource.content")
+                        editor(
+                          v-if="resource.content"
+                          :content="resource.content"
+                          @update="resource.content = $event()"
+                        )
           v-tab-item
             v-layout.wrap.pt-4
               v-card
@@ -164,7 +168,6 @@ import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
 
 // Components
-import Editor from "@/components/Editor/VueEditor";
 import Resources from "@/components/Resource/Resources";
 import Fields from "@/components/Resource/Fields";
 
@@ -230,7 +233,6 @@ export default {
   },
 
   components: {
-    Editor,
     Resources,
     Fields
   },
