@@ -128,6 +128,9 @@ export default {
     };
   },
   computed: {
+    profile() {
+      return this.$store.getters["profile/getProfile"];
+    },
     user() {
       return this.$store.getters["user/getUser"];
     },

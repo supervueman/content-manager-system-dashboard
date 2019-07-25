@@ -25,6 +25,9 @@ export default {
   name: "App",
   mixins: [accessMixin],
   computed: {
+    profile() {
+      return this.$store.getters["profile/getProfile"];
+    },
     notification() {
       return this.$store.getters.getNotification;
     }

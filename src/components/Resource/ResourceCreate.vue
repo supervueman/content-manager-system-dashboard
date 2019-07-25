@@ -113,7 +113,11 @@
             v-card-text
               v-layout.wrap
                 v-flex.md12
-                  Editor(v-model="resource.content")
+                  Editor(
+                    v-if="resource.content !== undefined"
+                    :content="resource.content"
+                    @update="resource.content = $event()"
+                  )
       v-card
         v-card-actions
           v-btn.ml-2(
@@ -134,7 +138,6 @@ import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
 
 // Components
-import Editor from "@/components/Editor/VueEditor";
 import Resources from "@/components/Resource/Resources";
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
@@ -199,10 +202,6 @@ export default {
         this.$store.dispatch("resource/createResource", this.resource);
       }
     }
-  },
-
-  components: {
-    Editor
   }
 };
 </script>

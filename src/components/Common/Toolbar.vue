@@ -50,6 +50,11 @@ export default {
       imgFolderBasePath
     };
   },
+  computed: {
+    profile() {
+      return this.$store.getters["profile/getProfile"];
+    }
+  },
   methods: {
     async logout() {
       await this.$store.dispatch("authenticate/logout");

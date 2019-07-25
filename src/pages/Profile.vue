@@ -70,7 +70,7 @@
           v-card-actions
             v-btn.ml-2(color="primary" @click="save") Сохранить
             v-btn(color="primary" @click="openDialogConfirm") Отмена
-        
+
       avatar-data(
         :lastname="profile.lastname"
         :firstname="profile.firstname"
@@ -118,6 +118,9 @@ export default {
     };
   },
   computed: {
+    profile() {
+      return this.$store.getters["profile/getProfile"];
+    },
     emailErrors() {
       const errors = [];
       if (!this.$v.profile.email.$dirty) return errors;

@@ -5,9 +5,23 @@
       v-btn(
         color="primary"
         dark
+        fab
+        icon
+        small
         @click="isResourceCreateDialog = true"
         v-if="managerAccess"
-      ) Создать ресурс
+      )
+        v-icon(size="20px") device_hub
+      v-btn(
+        color="primary"
+        dark
+        fab
+        icon
+        small
+        @click="isResourceCreateDialog = true"
+        v-if="managerAccess"
+      )
+        v-icon(size="24px") add
     v-data-table(
       :headers="headers"
       :items="resourceChilds"
