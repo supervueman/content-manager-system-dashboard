@@ -1,4 +1,4 @@
-import profile from '@/models/profile.json';
+import profile from '@/fakers/profile.js';
 
 export default {
   namespaced: true,

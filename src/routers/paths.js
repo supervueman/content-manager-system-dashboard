@@ -11,6 +11,14 @@ export default [{
   name: 'profile',
   component: 'Profile'
 }, {
+  path: '/profile-create',
+  name: 'profile-create',
+  component: 'ProfileCreate'
+}, {
+  path: '/users/:id',
+  name: 'user',
+  component: 'User'
+}, {
   path: '/resources/:id',
   name: 'resource',
   component: 'Resource'
@@ -50,8 +58,4 @@ export default [{
   path: '/users',
   name: 'users',
   component: 'Users'
-}, {
-  path: '/users/:id',
-  name: 'user',
-  component: 'User'
 }]

@@ -8,8 +8,7 @@ export default () => {
     false,
     // Регулярное выражение для определения файлов базовых компонентов
     /[A-Z]\w+\.(vue)$/
-  )
-
+  );
   requireComponent.keys().forEach(fileName => {
     const componentConfig = requireComponent(fileName);
 

@@ -3,7 +3,7 @@
     v-expansion-panel-content
       template.px-2(v-slot:header)
         div Изменить пароль
-      v-card
+      v-card(tag="form")
         v-card-text
           v-layout.wrap
             v-flex.md6.pr-3

@@ -12,7 +12,7 @@
         v-btn(flat slot="activator")
           div.body-1.mr-3 {{ profile.firstname }} {{profile.lastname}}
           v-avatar.mr-3(ize="40" color="grey lighten-4")
-            img(:src="`${imgFolderBasePath}/${profile.avatar}`")
+            img(:src="`${imgFolderBasePath}/${profile.image}`")
           v-icon(small) arrow_drop_down
         v-list
           v-list-tile(to="/profile")

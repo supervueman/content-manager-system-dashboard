@@ -79,7 +79,7 @@
                           template(v-slot:activator="{ on }")
                             v-text-field(
                               v-model="resource.slug"
-                            label="Псевдоним:"
+                              label="Псевдоним:"
                               on="on"
                               @input="$v.resource.slug.$touch()"
                               @blur="$v.resource.slug.$touch()"

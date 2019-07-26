@@ -1,9 +1,10 @@
-import user from '@/models/layout.json';
+import user from '@/fakers/profile';
+import defaultUser from '@/models/profile';
 
 export default {
   namespaced: true,
   state: {
-    user: {},
+    user: defaultUser,
     users: []
   },
   mutations: {
@@ -25,21 +26,7 @@ export default {
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setUser', {
-          id: "1",
-          firstname: "Rinat",
-          lastname: "Davlikamov",
-          patronymic: "",
-          email: "supervueman@gmail.com",
-          phone: "9370780830",
-          facebook: "",
-          instagram: "",
-          vkontakte: "",
-          avatar: "avatar.jpg",
-          role: "admin",
-          rang: 9999,
-          slug: "admin"
-        });
+        commit('setUser', user);
       }, 1500);
     },
 
@@ -101,21 +88,9 @@ export default {
     async fetchUsers({
       commit
     }, payload) {
-      commit('setUsers', [{
-        id: "1",
-        firstname: "Rinat",
-        lastname: "Davlikamov",
-        patronymic: "",
-        email: "supervueman@gmail.com",
-        phone: "9370780830",
-        facebook: "",
-        instagram: "",
-        vkontakte: "",
-        avatar: "avatar.jpg",
-        role: "admin",
-        rang: 9999,
-        slug: "admin"
-      }]);
+      setTimeout(() => {
+        commit('setUsers', [user]);
+      }, 1500);
     },
 
     setUser({

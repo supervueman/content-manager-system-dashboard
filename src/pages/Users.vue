@@ -10,7 +10,7 @@
                 color="primary"
                 dark
                 v-if="adminAccess"
-                @click="isUserCreateDialog = true"
+                to="/profile-create"
               ) Создать пользователя
             v-data-table(
               :headers="headers"
@@ -25,7 +25,7 @@
                       :size="40"
                       color="grey lighten-4"
                     )
-                      img(:src="`${imgFolderBasePath}/${props.item.avatar}`" alt="avatar")
+                      img(:src="`${imgFolderBasePath}/${props.item.image}`" alt="avatar")
                 td.text-xs-left
                   router-link(:to="`/users/${props.item.id}`") {{ props.item.lastname }} {{ props.item.firstname }}
                 td.text-xs-left

@@ -1,15 +1,15 @@
 {
-  "id": "1",
-  "firstname": "Rinat",
-  "lastname": "Davlikamov",
-  "patronymic": "",
-  "email": "supervueman@gmail.com",
-  "phone": "9370780830",
+  "id": "",
+  "slug": "",
+  "email": "",
+  "role": "",
+  "rang": 0,
+  "phone": "",
+  "firstname": "",
+  "lastname": "",
+  "middlename": "",
+  "image": "",
   "facebook": "",
-  "instagram": "",
   "vkontakte": "",
-  "avatar": "avatar.jpg",
-  "role": "admin",
-  "rang": 9999,
-  "slug": "admin"
+  "instagram": ""
 }
