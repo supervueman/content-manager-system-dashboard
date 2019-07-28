@@ -1,9 +1,10 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
     .body-2.mb-5 Шаблон: {{layout.title}}
-    v-layout.wrap.pt-5
+    v-layout.wrap
       layout-view(
         :layout="layout"
+        operationType="update"
       )
 </template>
 

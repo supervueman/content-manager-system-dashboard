@@ -1,7 +1,7 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
     .body-2.mb-5 Шаблоны
-    v-layout.wrap.pt-5
+    v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
           v-spacer
@@ -30,12 +30,9 @@
               )
                 v-icon delete
         div.text-xs-center.pt-2
-          v-pagination(
-            v-model="pagination.page"
-            :length="pages"
-            @input="getLayouts"
-            :value="0"
-            :total-visible="2"
+          pagination(
+            :itemsLength="layouts.length"
+            @getPage="getPage"
           )
     v-dialog(
       v-model="isRemoveDialog"
@@ -44,7 +41,7 @@
       remove-confirm(
         @remove="remove"
         :isActive.sync="isRemoveDialog"
-        :name="removeLayout.title"
+        :name="removeItem.title"
       )
 </template>
 
@@ -65,45 +62,37 @@ export default {
         },
         { text: "", sortable: false }
       ],
-      pagination: {
-        page: this.$route.query.skip / this.$route.query.limit || 1
-      },
-      limit: 5,
-      skip: 5,
       isRemoveDialog: false,
-      removeLayout: {}
+      removeItem: {}
     };
   },
 
   computed: {
-    pages() {
-      if (this.layouts.length === 0) return 0;
-      return Math.ceil(this.layouts.length / this.limit);
-    },
     layouts() {
-      return this.$store.getters["layout/getLayouts"];
+      return this.$store.getters["layout/getAll"];
     }
   },
 
   methods: {
-    getLayouts(page) {
-      this.$router.push(
-        `/layouts?skip=${page * this.skip - this.skip}&limit=${this.limit}`
-      );
+    async getPage({ skip, limit }) {
+      await this.$store.dispatch("user/fetchAll", {
+        skip,
+        limit
+      });
     },
 
     remove() {
-      this.$store.dispatch("layout/removeLayout", this.removeLayout.id);
+      this.$store.dispatch("layout/remove", this.removeItem.id);
     },
 
     removeDialogOpen(layout) {
-      this.removeLayout = layout;
+      this.removeItem = layout;
       this.isRemoveDialog = true;
     }
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/fetchLayouts", {
+    await this.$store.dispatch("layout/fetchAll", {
       id: this.$route.params.id,
       skip: this.$route.query.skip,
       limit: this.$route.query.limit

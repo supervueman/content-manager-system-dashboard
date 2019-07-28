@@ -28,6 +28,7 @@ export default {
       commit
     }, payload) {
       await setTimeout(() => {
+        commit('set', payload);
         this.dispatch("notification/fetch", {
           type: "success",
           message: `Успешно сохранено!`,
@@ -53,6 +54,7 @@ export default {
       commit
     }, payload) {
       await setTimeout(() => {
+        this.dispatch('layout/clear');
         this.dispatch("notification/fetch", {
           type: "success",
           message: `Успешно удалено!`,

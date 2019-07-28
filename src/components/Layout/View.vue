@@ -9,30 +9,27 @@
           v-tabs-items
             v-tab-item
               v-flex.xs12.md12.pt-4
-                v-expansion-panel(v-model="panel" expand)
-                  v-expansion-panel-content
-                    template.px-2(v-slot:header)
-                      div Общие данные
-                    v-card.mb-3
-                      v-card-text
-                        v-layout.wrap
-                          v-flex.md12
-                            v-text-field(
-                              v-model="layout.slug"
-                              label="Псевдоним:"
-                              required
-                              @input="$v.layout.slug.$touch()"
-                              @blur="$v.layout.slug.$touch()"
-                              :error-messages="slugErrors"
-                            )
-                            v-text-field(
-                              v-model="layout.title"
-                              label="Наименование:"
-                              required
-                              @input="$v.layout.title.$touch()"
-                              @blur="$v.layout.title.$touch()"
-                              :error-messages="titleErrors"
-                            )
+                v-card
+                  v-card-title Общие данные
+                  v-card-text
+                    v-layout.wrap
+                      v-flex.md12
+                        v-text-field(
+                          v-model="layout.slug"
+                          label="Псевдоним:"
+                          required
+                          @input="$v.layout.slug.$touch()"
+                          @blur="$v.layout.slug.$touch()"
+                          :error-messages="slugErrors"
+                        )
+                        v-text-field(
+                          v-model="layout.title"
+                          label="Наименование:"
+                          required
+                          @input="$v.layout.title.$touch()"
+                          @blur="$v.layout.title.$touch()"
+                          :error-messages="titleErrors"
+                        )
             v-tab-item
               v-flex.pt-4
                 v-card
@@ -41,18 +38,18 @@
       v-card-actions
         v-btn.ml-2(
           color="primary"
-          v-if="layout.id !== undefined && layout.id !== ''"
-          @click="update"
+          @click="create"
+          v-if="operationType === 'create'"
         ) Создать
         v-btn.ml-2(
           color="primary"
-          v-if="layout.id !== undefined && layout.id !== ''"
           @click="update"
+          v-if="operationType === 'update'"
         ) Сохранить
         v-btn.ml-2(
           color="error"
-          v-if="layout.id !== undefined && layout.id !== ''"
           @click="isRemoveDialog = true"
+          v-if="operationType === 'update'"
         ) Удалить
     v-dialog(
       v-model="isRemoveDialog"
@@ -68,7 +65,6 @@
 <script>
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
-import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
 
 // Comnponents
@@ -82,7 +78,7 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "LayoutView",
   props: {
-    operationKey: {
+    operationType: {
       type: String,
       default: "create"
     },
@@ -90,7 +86,7 @@ export default {
       type: Object
     }
   },
-  mixins: [accessMixin, panelMixin, validationMixin],
+  mixins: [accessMixin, validationMixin],
 
   validations: {
     layout: {
@@ -101,7 +97,6 @@ export default {
 
   data() {
     return {
-      panelName: "panel-layout-base-data",
       menu: false,
       isRemoveDialog: false,
       tab: null
@@ -113,31 +108,62 @@ export default {
       const errors = [];
       if (!this.$v.layout.slug.$dirty) return errors;
       !this.$v.layout.slug.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов");
+        errors.push("Псевдоним должен быть не менее 3 символов!");
       !this.$v.layout.slug.alpha &&
-        errors.push("Разрешены только английские символы");
-      !this.$v.layout.slug.required && errors.push("Обязательное поле");
+        errors.push("Разрешены только английские символы!");
+      !this.$v.layout.slug.required && errors.push("Обязательное поле!");
       return errors;
     },
     titleErrors() {
       const errors = [];
       if (!this.$v.layout.title.$dirty) return errors;
       !this.$v.layout.title.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов");
-      !this.$v.layout.title.required && errors.push("Обязательное поле");
+        errors.push("Псевдоним должен быть не менее 3 символов!");
+      !this.$v.layout.title.required && errors.push("Обязательное поле!");
       return errors;
     }
   },
 
   methods: {
+    /**
+     * @function create
+     * @async
+     * Функция для создания шаблона
+     * вызывает action {@link store/layout/create}
+     * TODO: после удачного создания шаблона
+     * делать редирект на сам шаблон получая его
+     * данные через {@link store/layout/fetch} для
+     * дальнейшего редактирования
+     */
+    async create() {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        await this.$store.dispatch("layout/create", this.layout);
+      }
+    },
+
+    /**
+     * @function update
+     * @async
+     * Функция обновления шаблона
+     * вызывает action {@link store/layout/update}
+     */
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("layout/updateLayout", this.layout);
+        await this.$store.dispatch("layout/update", this.layout);
       }
     },
+
+    /**
+     * @function remove
+     * @async
+     * Удаление шаблона через
+     * action {@link store/layout/remove}
+     */
     async remove() {
-      await this.$store.dispatch("layout/removeLayout", this.layout.id);
+      await this.$store.dispatch("layout/remove", this.layout.id);
+      this.$router.push("/layouts");
     }
   },
 

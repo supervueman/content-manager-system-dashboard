@@ -44,13 +44,6 @@
                   )
                     v-icon delete
             div.text-xs-center.pt-2
-              //- v-pagination(
-              //-   v-model="pagination.page"
-              //-   :length="pages"
-              //-   @input="getUsers"
-              //-   :value="0"
-              //-   :total-visible="2"
-              //- )
               pagination(
                 :itemsLength="users.length"
                 @getPage="getPage"
@@ -62,7 +55,7 @@
           remove-confirm(
             @remove="remove"
             :isActive.sync="isRemoveDialog"
-            :name="`${removeUser.lastname} ${removeUser.firstname}`"
+            :name="`${removeItem.lastname} ${removeItem.firstname}`"
           )
 </template>
 
@@ -90,7 +83,7 @@ export default {
         { text: "", sortable: false }
       ],
       isRemoveDialog: false,
-      removeUser: {},
+      removeItem: {},
       imgFolderBasePath
     };
   },
@@ -110,11 +103,11 @@ export default {
     },
 
     async remove() {
-      await this.$store.dispatch("user/removeUser", this.removeUser.id);
+      await this.$store.dispatch("profile/remove", this.removeItem.id);
     },
 
     removeDialogOpen(user) {
-      this.removeUser = user;
+      this.removeItem = user;
       this.isRemoveDialog = true;
     }
   },

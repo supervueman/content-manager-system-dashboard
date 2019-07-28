@@ -1,23 +1,35 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
     .body-2.mb-5 Создание шаблона
-      v-layout.wrap.pt-5
-        layout-create
+    v-layout.wrap
+      layout-view(
+        :layout="layout"
+        operationType="create"
+      )
 </template>
 
 <script>
 // Components
-import LayoutCreate from "@/components/Layout/LayoutCreate";
+import LayoutView from "@/components/Layout/View";
 
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
+
+// Models
+import layout from "@/models/layout";
 
 export default {
   name: "LayoutCreatePage",
   mixins: [accessMixin],
 
+  data() {
+    return {
+      layout
+    };
+  },
+
   components: {
-    LayoutCreate
+    LayoutView
   }
 };
 </script>
