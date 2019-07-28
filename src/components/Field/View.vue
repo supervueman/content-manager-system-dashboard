@@ -23,7 +23,7 @@
                   required
                 )
                 v-textarea(
-                  v-if="field.fieldType === 'array'"
+                  v-if="field.fieldType === 'migx'"
                   v-model="field.schema"
                   label="Схема:"
                   placeholder="Строка или JSON"
