@@ -42,8 +42,8 @@ export default {
         }`
       );
       this.$emit("getPage", {
-        skip: this.$route.query.skip,
-        limit: this.$route.query.limit
+        skip: Number(this.$route.query.skip),
+        limit: Number(this.$route.query.limit)
       });
     }
   }

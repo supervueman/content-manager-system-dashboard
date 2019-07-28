@@ -102,8 +102,11 @@ export default {
   },
 
   methods: {
-    getPage({ skip, limit }) {
-      console.log(skip, limit);
+    async getPage({ skip, limit }) {
+      await this.$store.dispatch("user/fetchAll", {
+        skip,
+        limit
+      });
     },
 
     async remove() {
