@@ -50,6 +50,8 @@ export default {
       await setTimeout(() => {
         if (this.getters['profile/get'].id === payload) {
           this.dispatch('profile/clear');
+        } else {
+          this.dispatch('user/clear');
         }
       }, 1500);
     },

@@ -41,7 +41,7 @@ export default {
     clear({
       commit
     }) {
-      commit('set', {})
+      commit('set', defaultUser)
     }
   },
   getters: {
