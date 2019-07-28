@@ -1,7 +1,7 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
-    .body-2.mb-5 Профиль: {{user.slug}}
-    profile-view(:profile="user" operationKey="update")
+	v-flex(v-if="adminAccess")
+		.body-2.mb-5 Профиль: {{user.slug}}
+		profile-view(:profile="user" operationKey="update")
 </template>
 
 <script>
@@ -9,21 +9,21 @@
 import accessMixin from "@/mixins/accessMixin";
 
 // Components
-import ProfileView from "@/components/Profile/ProfileView";
+import ProfileView from "@/components/Profile/View";
 
 export default {
   name: "ProfilePage",
   mixins: [accessMixin],
   computed: {
     user() {
-      return this.$store.getters["user/getUser"];
+      return this.$store.getters["user/get"];
     }
   },
   components: {
     ProfileView
   },
   async beforeCreate() {
-    await this.$store.dispatch("user/fetchUser", this.$route.params.id);
+    await this.$store.dispatch("user/fetch", this.$route.params.id);
   }
 };
 </script>

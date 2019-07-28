@@ -1,4 +1,4 @@
-import profile from '@/fakers/profile';
+import profile from '@/fakers/admin';
 import defaultProfile from '@/models/profile'
 
 export default {
@@ -41,6 +41,16 @@ export default {
           message: `Успешно сохранено!`,
           isActive: true
         });
+      }, 1500);
+    },
+
+    async remove({
+      commit
+    }, payload) {
+      await setTimeout(() => {
+        if (this.getters['profile/get'].id === payload) {
+          this.dispatch('profile/clear');
+        }
       }, 1500);
     },
 

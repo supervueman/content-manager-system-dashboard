@@ -1,4 +1,4 @@
-import user from '@/fakers/profile';
+import user from '@/fakers/manager';
 import defaultUser from '@/models/profile';
 
 export default {
@@ -8,25 +8,25 @@ export default {
     users: []
   },
   mutations: {
-    setUser(state, payload) {
+    set(state, payload) {
       state.user = payload;
     },
-    setUsers(state, payload) {
+    setAll(state, payload) {
       state.users = payload;
     }
   },
   actions: {
     /**
-     * @function fetchUser
+     * @function fetch
      * @async
      * @param {String} payload layout.id
      * Функция для получения менеджера по id
      */
-    async fetchUser({
+    async fetch({
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setUser', user);
+        commit('set', user);
       }, 1500);
     },
 
@@ -36,7 +36,7 @@ export default {
      * @param {Object} payload layout
      * Функция для создания менеджера
      */
-    async createUser({
+    async create({
       commit
     }, payload) {
       setTimeout(() => {
@@ -54,15 +54,15 @@ export default {
      * @param {Object} payload user
      * Функция для обновления менеджера
      */
-    async updateUser({
+    async update({
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setUser', payload);
-        this.dispatch("fetchNotification", {
+        commit('set', payload);
+        this.dispatch("notification/fetch", {
           type: "success",
           message: `Успешно сохранено.`,
-          isNotification: true
+          isActive: true
         });
       }, 1500);
     },
@@ -73,43 +73,43 @@ export default {
      * @param {String} payload user.id
      * Функция для удаления менеджера
      */
-    async removeUser({
+    async remove({
       commit
     }, payload) {
       setTimeout(() => {
-        this.dispatch("fetchNotification", {
+        this.dispatch("notification/fetch", {
           type: "success",
           message: `Успешно удалено.`,
-          isNotification: true
+          isActive: true
         });
       }, 1500);
     },
 
-    async fetchUsers({
+    async fetchAll({
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setUsers', [user]);
+        commit('setAll', [user]);
       }, 1500);
     },
 
-    setUser({
+    set({
       commit
     }, payload) {
-      commit('setUser', user);
+      commit('set', user);
     },
 
-    clearUser({
+    clear({
       commit
     }) {
-      commit('setUser', {})
+      commit('set', {})
     }
   },
   getters: {
-    getUser(state) {
+    get(state) {
       return state.user;
     },
-    getUsers(state) {
+    getAll(state) {
       return state.users;
     }
   }

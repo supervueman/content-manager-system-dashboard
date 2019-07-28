@@ -91,7 +91,6 @@ export default {
       limit: 5,
       skip: 5,
       isRemoveDialog: false,
-      isUserCreateDialog: false,
       removeUser: {},
       imgFolderBasePath
     };
@@ -103,7 +102,7 @@ export default {
       return Math.ceil(this.users.length / this.limit);
     },
     users() {
-      return this.$store.getters["user/getUsers"];
+      return this.$store.getters["user/getAll"];
     }
   },
 
@@ -125,7 +124,7 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("user/fetchUsers", {
+    await this.$store.dispatch("user/fetchAll", {
       id: this.$route.params.id,
       skip: this.$route.query.skip,
       limit: this.$route.query.limit

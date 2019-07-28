@@ -9,7 +9,7 @@
 import accessMixin from "@/mixins/accessMixin";
 
 // Components
-import ProfileView from "@/components/Profile/ProfileView";
+import ProfileView from "@/components/Profile/View";
 
 // Model
 import profile from "@/models/profile";

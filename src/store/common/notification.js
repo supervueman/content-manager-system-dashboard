@@ -15,8 +15,6 @@ export default {
     fetch({
       commit
     }, payload) {
-
-      console.log('hi')
       commit('set', payload);
       const closeNotification = {
         isActive: false

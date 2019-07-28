@@ -221,10 +221,6 @@ export default {
 
   data() {
     return {
-      isChanged: false,
-      isChangesConfirmDialog: false,
-      confirmKey: "",
-      routeLinkTo: "",
       imgFolderBasePath,
       showPassword: false,
       showConfirmPassword: false,
@@ -275,7 +271,13 @@ export default {
   methods: {
     /**
      * @function create
-     * Сохраняет профиль вызывая {@link store/profileOwner/saveProfile}
+     * @async
+     * Функция для создания профиля
+     * вызывает action {@link store/profile/create}
+     * TODO: после удачного создания пользователя
+     * делать редирект на его профиль получая его
+     * данные через {@link store/user/fetch} для
+     * дальнейшего редактирования
      */
     async create() {
       this.$v.$touch();
@@ -286,7 +288,9 @@ export default {
 
     /**
      * @function update
-     * Сохраняет профиль вызывая {@link store/profile/saveProfile}
+     * @async
+     * Функция обновления профиля
+     * вызывает action {@link store/profile/update}
      */
     async update() {
       this.$v.profile.$touch();
@@ -297,21 +301,26 @@ export default {
 
     /**
      * @function remove
-     * Удаление пользователя
+     * @async
+     * Удаление пользователя через
+     * action {@link store/profile/remove}
+     * @if Если параметр id у роутинга существует,
+     * то @if Если параметр id роутинга равен id
+     * {@link store/profile/get} текущего пользователя,
+     * то редирект на главную @else иначе редирект
+     * на страницу пользователей
+     * @else редирект на главную
      */
     async remove() {
-      await this.$store.dispatch("user/removeUser");
-      this.$router.push("/");
-    },
-
-    /**
-     * @function openDialogConfirm
-     * Если изменены свойства {@link profile} то при отмене изменений
-     * открывается модальное окно для подтверждения
-     */
-    openDialogConfirm() {
-      if (this.isChanged) {
-        this.isChangesConfirmDialog = true;
+      await this.$store.dispatch("profile/remove", this.profile.id);
+      if (this.$route.params.id) {
+        if (this.$route.params.id === this.$store.getters["profile/get"].id) {
+          this.$router.push("/");
+        } else {
+          this.$router.push("/users");
+        }
+      } else {
+        this.$router.push("/");
       }
     }
   },

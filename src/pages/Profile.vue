@@ -9,7 +9,7 @@
 import accessMixin from "@/mixins/accessMixin";
 
 // Components
-import ProfileView from "@/components/Profile/ProfileView";
+import ProfileView from "@/components/Profile/View";
 
 export default {
   name: "ProfilePage",
