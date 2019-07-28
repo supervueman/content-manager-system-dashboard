@@ -1,38 +1,63 @@
-import profile from '@/fakers/profile.js';
+import profile from '@/fakers/profile';
+import defaultProfile from '@/models/profile'
 
 export default {
   namespaced: true,
   state: {
-    profile: {}
+    profile: defaultProfile
   },
   mutations: {
-    setProfile(state, payload) {
+    set(state, payload) {
       state.profile = payload;
     }
   },
   actions: {
-    async fetchProfile({
+    async fetch({
       commit
     }) {
-      setTimeout(() => {
-        commit('setProfile', profile);
+      await setTimeout(() => {
+        commit('set', profile);
       }, 1500);
     },
 
-    setProfile({
+    async create({
       commit
     }, payload) {
-      commit('setProfile', profile);
+      await setTimeout(() => {
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: `Успешно сохранено!`,
+          isActive: true
+        });
+      }, 1500);
     },
 
-    clearProfile({
+    async update({
+      commit
+    }, payload) {
+      await setTimeout(() => {
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: `Успешно сохранено!`,
+          isActive: true
+        });
+      }, 1500);
+    },
+
+    set({
+      commit
+    }, payload) {
+      commit('set', profile);
+    },
+
+    clear({
       commit
     }) {
-      commit('setProfile', {})
+      commit('set', defaultProfile)
     }
   },
   getters: {
-    getProfile(state) {
+    get(state) {
       return state.profile;
     }
   }

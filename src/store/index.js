@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import common from './common';
+import notification from './common/notification';
 import profile from './profile';
 import authenticate from './authenticate';
 import resource from './resource';
@@ -14,7 +14,7 @@ import user from './user';
 
 export const store = new Vuex.Store({
   modules: {
-    common,
+    notification,
     authenticate,
     profile,
     resource,

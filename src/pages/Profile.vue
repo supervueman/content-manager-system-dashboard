@@ -1,7 +1,7 @@
 <template lang="pug">
-  v-flex
-    .body-2.mb-5 Ваш профиль: {{profile.slug}}
-    profile-view(:profile="profile" operationKey="update")
+	v-flex
+		.body-2.mb-5 Ваш профиль: {{profile.slug}}
+		profile-view(:profile="profile" operationKey="update")
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
   name: "ProfilePage",
   computed: {
     profile() {
-      return this.$store.getters["profile/getProfile"];
+      return this.$store.getters["profile/get"];
     }
   },
   components: {

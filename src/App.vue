@@ -2,17 +2,16 @@
 	v-app(light)
 		transition(name="fade")
 			notification(
-				v-if="notification.isNotification"
+				v-if="notification.isActive"
 				:type="notification.type"
 				:message="notification.message"
 			)
 		toolbar(
 			:profileId="profile.id"
-			:profileFirstname="profile.firstname"
-			:profileLastname="profile.lastname"
-			:profileAvatar="profile.avatar"
+			:firstname="profile.firstname"
+			:lastname="profile.lastname"
+			:image="profile.image"
 		)
-
 		sidebar(v-if="adminAccess || managerAccess")
 		v-content
 			v-container(fluid)
@@ -26,14 +25,14 @@ export default {
   mixins: [accessMixin],
   computed: {
     profile() {
-      return this.$store.getters["profile/getProfile"];
+      return this.$store.getters["profile/get"];
     },
     notification() {
-      return this.$store.getters.getNotification;
+      return this.$store.getters["notification/get"];
     }
   },
   async beforeCreate() {
-    await this.$store.dispatch("profile/fetchProfile");
+    await this.$store.dispatch("profile/fetch");
     if (this.adminAccess || this.managerAccess) {
       if (this.$route.fullPath === "/login") {
         this.$router.back();

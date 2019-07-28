@@ -60,14 +60,6 @@
             :isActive.sync="isRemoveDialog"
             :name="`${removeUser.lastname} ${removeUser.firstname}`"
           )
-        v-dialog(
-          v-model="isUserCreateDialog"
-        )
-          v-card
-            v-card-text
-              user-create(
-                @close="isUserCreateDialog = false"
-              )
 </template>
 
 <script>
@@ -76,9 +68,6 @@ import accessMixin from "@/mixins/accessMixin";
 
 // Config
 import { imgFolderBasePath } from "@/config";
-
-// Components
-import UserCreate from "@/components/User/UserCreate";
 
 export default {
   name: "Users",
@@ -125,18 +114,14 @@ export default {
       );
     },
 
-    remove() {
-      this.$store.dispatch("user/removeUser", this.removeUser.id);
+    async remove() {
+      await this.$store.dispatch("user/removeUser", this.removeUser.id);
     },
 
     removeDialogOpen(user) {
       this.removeUser = user;
       this.isRemoveDialog = true;
     }
-  },
-
-  components: {
-    UserCreate
   },
 
   async mounted() {

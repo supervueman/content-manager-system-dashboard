@@ -1,32 +1,35 @@
 export default {
   state: {
     notification: {
-      isNotification: false,
+      isActive: false,
       type: 'success',
       message: 'Success'
     },
   },
   mutations: {
-    setNotification(state, payload) {
+    set(state, payload) {
       state.notification = payload;
     },
   },
   actions: {
-    fetchNotification({
+    fetch({
       commit
     }, payload) {
-      commit('setNotification', payload);
+
+      console.log('hi')
+      commit('set', payload);
       const closeNotification = {
-        isNotification: false
-      }
+        isActive: false
+      };
       setTimeout(() => {
-        commit('setNotification', closeNotification)
-      }, 3000)
+        commit('set', closeNotification)
+      }, 3000);
     },
   },
   getters: {
-    getNotification(state) {
+    get(state) {
       return state.notification;
     },
-  }
+  },
+  namespaced: true
 };
