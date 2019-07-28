@@ -44,12 +44,16 @@
                   )
                     v-icon delete
             div.text-xs-center.pt-2
-              v-pagination(
-                v-model="pagination.page"
-                :length="pages"
-                @input="getUsers"
-                :value="0"
-                :total-visible="2"
+              //- v-pagination(
+              //-   v-model="pagination.page"
+              //-   :length="pages"
+              //-   @input="getUsers"
+              //-   :value="0"
+              //-   :total-visible="2"
+              //- )
+              pagination(
+                :itemsLength="users.length"
+                @getPage="getPage"
               )
         v-dialog(
           v-model="isRemoveDialog"
@@ -85,11 +89,6 @@ export default {
         { text: "Роль", sortable: true, value: "role" },
         { text: "", sortable: false }
       ],
-      pagination: {
-        page: this.$route.query.skip / this.$route.query.limit || 1
-      },
-      limit: 5,
-      skip: 5,
       isRemoveDialog: false,
       removeUser: {},
       imgFolderBasePath
@@ -97,20 +96,14 @@ export default {
   },
 
   computed: {
-    pages() {
-      if (this.users.length === 0) return 0;
-      return Math.ceil(this.users.length / this.limit);
-    },
     users() {
       return this.$store.getters["user/getAll"];
     }
   },
 
   methods: {
-    getUsers(page) {
-      this.$router.push(
-        `/users?skip=${page * this.skip - this.skip}&limit=${this.limit}`
-      );
+    getPage({ skip, limit }) {
+      console.log(skip, limit);
     },
 
     async remove() {

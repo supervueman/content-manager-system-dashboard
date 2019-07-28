@@ -12,7 +12,7 @@ import accessMixin from "@/mixins/accessMixin";
 import ProfileView from "@/components/Profile/View";
 
 export default {
-  name: "ProfilePage",
+  name: "UserPage",
   mixins: [accessMixin],
   computed: {
     user() {

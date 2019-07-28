@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex
+	v-flex(v-if="adminAccess || managerAccess")
 		.body-2.mb-5 Ваш профиль: {{profile.slug}}
 		profile-view(:profile="profile" operationKey="update")
 </template>
@@ -13,6 +13,7 @@ import ProfileView from "@/components/Profile/View";
 
 export default {
   name: "ProfilePage",
+  mixins: [accessMixin],
   computed: {
     profile() {
       return this.$store.getters["profile/get"];
