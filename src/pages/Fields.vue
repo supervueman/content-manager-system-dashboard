@@ -1,7 +1,7 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
     .body-2.mb-5 Дополнительные поля
-    v-layout.wrap.pt-5
+    v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
           v-spacer
