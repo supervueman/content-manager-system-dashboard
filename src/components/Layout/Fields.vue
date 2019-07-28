@@ -68,8 +68,6 @@ export default {
       pagination: {
         page: this.$route.query.skip / this.$route.query.limit || 1
       },
-      isRemoveDialog: false,
-      removeField: {},
       selected: []
     };
   },

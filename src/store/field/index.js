@@ -1,136 +1,97 @@
-import field from '@/models/additional-field.json';
+import defaultField from '@/models/field';
+import field from '@/fakers/field';
 
 export default {
   namespaced: true,
   state: {
-    field: {},
-    fields: []
+    field: defaultField,
+    fields: [],
+    types: ['text', 'textarea', 'editor', 'image', 'select', 'migx', 'radio', 'date', 'time', 'colorpicker', 'checkbox']
   },
   mutations: {
-    setField(state, payload) {
+    set(state, payload) {
       state.field = payload;
     },
-    setFields(state, payload) {
+    setAll(state, payload) {
       state.fields = payload;
     }
   },
   actions: {
-    /**
-     * @function fetchField
-     * @async
-     * @param {String} payload field.id
-     * Функция для получения доп поля по id
-     */
-    async fetchField({
+    async fetch({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('setField', field);
+      await setTimeout(() => {
+        commit('set', field);
       }, 1500);
     },
 
-    /**
-     * @function createField
-     * @async
-     * @param {Object} payload field
-     * Функция для создания доп поля
-     */
-    async createField({
+    async create({
       commit
     }, payload) {
-      setTimeout(() => {
-        this.dispatch("fetchNotification", {
+      await setTimeout(() => {
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено.`,
-          isNotification: true
+          message: 'Успешно сохранено!',
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function updateField
-     * @async
-     * @param {Object} payload field
-     * Функция для обновления доп поля
-     */
-    async updateField({
+    async update({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('setField', payload);
-        this.dispatch("fetchNotification", {
+      await setTimeout(() => {
+        commit('set', payload);
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено.`,
-          isNotification: true
+          message: 'Успешно сохранено!',
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function deleteField
-     * @async
-     * @param {String} payload field.id
-     * Функция для удаления доп поля
-     */
-    async removeField({
+    async remove({
       commit
     }, payload) {
-      setTimeout(() => {
-        this.dispatch("fetchNotification", {
+      await setTimeout(() => {
+        this.dispatch('field/clear');
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно удалено.`,
-          isNotification: true
+          message: 'Успешно удалено!',
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function fetchFields
-     * @async
-     * Функция на получение все полей
-     */
-    async fetchFields({
+    async fetchAll({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('setFields', [{
-          id: '1',
-          slug: 'field',
-          title: 'Поле',
-          fieldType: 'text',
-          layouts: [{
-              id: '1',
-              slug: 'base',
-              title: 'Базовый шаблон'
-            },
-            {
-              id: '2',
-              slug: 'custom',
-              title: 'Кастомный шаблон'
-            }
-          ]
-        }])
+      await setTimeout(() => {
+        commit('setAll', [field]);
       }, 1500);
     },
 
-    setField({
+    set({
       commit
     }, payload) {
-      commit('setField', field);
+      commit('set', field);
     },
 
-    clearField({
+    clear({
       commit
     }) {
-      commit('setField', {})
+      commit('set', defaultField);
     }
   },
   getters: {
-    getField(state) {
+    get(state) {
       return state.field;
     },
-    getFields(state) {
+    getAll(state) {
       return state.fields;
+    },
+    getTypes(state) {
+      return state.types;
     }
   }
 };

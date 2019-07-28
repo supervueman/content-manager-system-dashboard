@@ -39,12 +39,9 @@
               )
                 v-icon delete
         div.text-xs-center.pt-2
-          v-pagination(
-            v-model="pagination.page"
-            :length="pages"
-            @input="getFields"
-            :value="0"
-            :total-visible="2"
+          pagination(
+            :itemsLength="fields.length"
+            @getPage="getPage"
           )
     v-dialog(
       v-model="isRemoveDialog"
@@ -53,7 +50,7 @@
       remove-confirm(
         @remove="remove"
         :isActive.sync="isRemoveDialog"
-        :name="removeField.title"
+        :name="removeItem.title"
       )
 </template>
 
@@ -82,39 +79,36 @@ export default {
       limit: 5,
       skip: 5,
       isRemoveDialog: false,
-      removeField: {}
+      removeItem: {}
     };
   },
 
   computed: {
-    pages() {
-      if (this.fields.length === 0) return 0;
-      return Math.ceil(this.fields.length / this.limit);
-    },
     fields() {
-      return this.$store.getters["field/getFields"];
+      return this.$store.getters["field/getAll"];
     }
   },
 
   methods: {
-    getFields(page) {
-      this.$router.push(
-        `/fields?skip=${page * this.skip - this.skip}&limit=${this.limit}`
-      );
+    async getPage({ skip, limit }) {
+      await this.$store.dispatch("user/fetchAll", {
+        skip,
+        limit
+      });
     },
 
     remove() {
-      this.$store.dispatch("field/removeField", this.removeField.id);
+      this.$store.dispatch("field/remove", this.removeItem.id);
     },
 
     removeDialogOpen(field) {
-      this.removeField = field;
+      this.removeItem = field;
       this.isRemoveDialog = true;
     }
   },
 
   async mounted() {
-    await this.$store.dispatch("field/fetchFields", {
+    await this.$store.dispatch("field/fetchAll", {
       id: this.$route.params.id,
       skip: this.$route.query.skip,
       limit: this.$route.query.limit

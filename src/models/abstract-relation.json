@@ -1,6 +1,0 @@
-{
-  "id": "1",
-  "slug": "relation",
-  "title": "Доп товары",
-  "relationsType": "belongs-to-many"
-}
