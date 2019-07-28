@@ -78,7 +78,7 @@
 									required
 								)
 				//- Ключи
-				v-expansion-panel(expand v-if="(adminAccess || managerAccess) && operationKey === 'update'")
+				v-expansion-panel(expand v-if="(adminAccess || managerAccess) && operationType === 'update'")
 					v-expansion-panel-content
 						template(v-slot:header)
 							div Ключи
@@ -87,9 +87,9 @@
 								v-flex.md12
 									div Api key: sdfew45frs4e3qwvfdrt5e4rt354tvfds
 				//- Изменение пароля
-				password-change(v-if="operationKey === 'update'")
+				password-change(v-if="operationType === 'update'")
 				//- Создание пароля
-				v-card(v-if="operationKey === 'create'" tag="form")
+				v-card(v-if="operationType === 'create'" tag="form")
 					v-card-text
 						v-layout.wrap
 							v-flex.md6.pr-3
@@ -120,21 +120,21 @@
 						v-btn.ml-2(
 							color="primary"
 							@click="create"
-							v-if="operationKey === 'create'"
+							v-if="operationType === 'create'"
 						) Создать
 						v-btn.ml-2(
 							color="primary"
 							@click="update"
-							v-if="operationKey === 'update'"
+							v-if="operationType === 'update'"
 						) Сохранить
 						v-btn(
 							color="error"
 							@click="isRemoveDialog = true"
-							v-if="operationKey === 'update'"
+							v-if="operationType === 'update'"
 						) Удалить
 			//- Аватар
 			v-flex.xs12.md5.pl-2
-				v-card.pt-3.mb-3(v-if="operationKey === 'update'")
+				v-card.pt-3.mb-3(v-if="operationType === 'update'")
 					v-card-text.py-0.justify-center.d-flex
 						v-layout.justify-center
 							v-avatar(size="150" color="#fff" class="avatar")
@@ -196,7 +196,7 @@ export default {
     profile: {
       type: Object
     },
-    operationKey: {
+    operationType: {
       type: String,
       default: "update"
     }

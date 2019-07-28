@@ -1,7 +1,7 @@
 <template lang="pug">
 	v-flex(v-if="adminAccess")
 		.body-2.mb-5 Профиль: {{user.slug}}
-		profile-view(:profile="user" operationKey="update")
+		profile-view(:profile="user" operationType="update")
 </template>
 
 <script>

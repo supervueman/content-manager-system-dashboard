@@ -1,117 +1,91 @@
-import layout from '@/models/layout.json';
+import layout from '@/fakers/layout';
+import defaultLayout from '@/models/layout';
 
 export default {
   namespaced: true,
   state: {
-    layout: {},
+    layout: defaultLayout,
     layouts: []
   },
   mutations: {
-    setLayout(state, payload) {
+    set(state, payload) {
       state.layout = payload;
     },
-    setLayouts(state, payload) {
+    setAll(state, payload) {
       state.layouts = payload;
     }
   },
   actions: {
-    /**
-     * @function fetchLayout
-     * @async
-     * @param {String} payload layout.id
-     * Функция для получения шаблона по id
-     */
-    async fetchLayout({
+    async fetch({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('setLayout', layout);
+      await setTimeout(() => {
+        commit('set', layout);
       }, 1500);
     },
 
-    /**
-     * @function createLayout
-     * @async
-     * @param {Object} payload layout
-     * Функция для создания шаблона
-     */
-    async createLayout({
+    async create({
       commit
     }, payload) {
-      setTimeout(() => {
-        this.dispatch("fetchNotification", {
+      await setTimeout(() => {
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено.`,
-          isNotification: true
+          message: `Успешно сохранено!`,
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function updateLayout
-     * @async
-     * @param {Object} payload layout
-     * Функция для обновления шаблона
-     */
-    async updateLayout({
+    async update({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('setLayout', payload);
-        this.dispatch("fetchNotification", {
+      await setTimeout(() => {
+        commit('set', payload);
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено.`,
-          isNotification: true
+          message: `Успешно сохранено!`,
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function deleteLayout
-     * @async
-     * @param {String} payload layout.id
-     * Функция для удаления шаблона
-     */
-    async removeLayout({
+    async remove({
       commit
     }, payload) {
-      setTimeout(() => {
-        this.dispatch("fetchNotification", {
+      await setTimeout(() => {
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно удалено.`,
-          isNotification: true
+          message: `Успешно удалено!`,
+          isActive: true
         });
       }, 1500);
     },
 
-    async fetchLayouts({
+    async fetchAll({
       commit
     }, payload) {
-      commit('setLayouts', [{
-        id: "1",
-        slug: "base",
-        title: "Базовый шаблон",
-        fields: []
-      }]);
+      await setTimeout(() => {
+        commit('setAll', [layout]);
+      }, 1500);
     },
 
-    setLayout({
+    set({
       commit
     }, payload) {
-      commit('setLayout', layout);
+      commit('set', layout);
     },
 
-    clearLayout({
+    clear({
       commit
     }) {
-      commit('setLayout', {})
+      commit('set', defaultLayout);
     }
   },
   getters: {
-    getLayout(state) {
+    get(state) {
       return state.layout;
     },
-    getLayouts(state) {
+    getAll(state) {
       return state.layouts;
     }
   }

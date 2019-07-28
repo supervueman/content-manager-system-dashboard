@@ -1,7 +1,7 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
     .body-2.mb-5 Создание профиля
-    profile-view(:profile="profile" operationKey="create")
+    profile-view(:profile="profile" operationType="create")
 </template>
 
 <script>
