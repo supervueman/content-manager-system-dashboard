@@ -74,7 +74,7 @@ export default {
 
   computed: {
     fields() {
-      return this.$store.getters["field/getFields"];
+      return this.$store.getters["field/getAll"];
     }
   },
 
@@ -94,7 +94,7 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("field/fetchFields", {
+    await this.$store.dispatch("field/fetchAll", {
       id: this.$route.params.id,
       skip: this.$route.query.skip,
       limit: this.$route.query.limit
