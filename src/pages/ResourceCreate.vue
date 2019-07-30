@@ -2,22 +2,34 @@
   v-flex(v-if="managerAccess")
     .body-2.mb-5 Создание ресурса
       v-layout.wrap.pt-5
-        resource-create
+        resource-view(
+          :resource="resource"
+          operationType="create"
+        )
 </template>
 
 <script>
 // Components
-import ResourceCreate from "@/components/Resource/ResourceCreate";
+import ResourceView from "@/components/Resource/View";
 
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
+
+// Models
+import resource from "@/models/resource";
 
 export default {
   name: "ResourceCreatePage",
   mixins: [accessMixin],
 
+  data() {
+    return {
+      resource
+    };
+  },
+
   components: {
-    ResourceCreate
+    ResourceView
   }
 };
 </script>

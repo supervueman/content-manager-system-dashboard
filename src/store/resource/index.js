@@ -1,9 +1,10 @@
-import resource from '@/models/resource.json';
+import resource from '@/fakers/resource';
+import defaultResource from '@/models/resource';
 
 export default {
   namespaced: true,
   state: {
-    resource: {},
+    resource: defaultResource,
     layout: {},
     fields: {
       text: {
@@ -183,14 +184,14 @@ export default {
         }
       }
     },
-    resourceChilds: [],
+    resources: [],
   },
   mutations: {
-    setResource(state, payload) {
+    set(state, payload) {
       state.resource = payload;
     },
-    setResourceChilds(state, payload) {
-      state.resourceChilds = payload;
+    setAll(state, payload) {
+      state.resources = payload;
     },
     setLayout(state, payload) {
       state.layout = payload;
@@ -200,121 +201,78 @@ export default {
     }
   },
   actions: {
-    /**
-     * @function fetchResource
-     * @async
-     * Функция для получения ресурса по id
-     */
-    async fetchResource({
+    async fetch({
       commit
     }) {
       setTimeout(() => {
-        commit('setResource', resource);
+        commit('set', resource);
       }, 1500);
     },
 
-    /**
-     * @function createResource
-     * @async
-     * @param {Object} payload resource
-     * Функция для создания ресурса
-     */
-    async createResource({
+    async create({
       commit
     }, payload) {
       setTimeout(() => {
-        this.dispatch("fetchNotification", {
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено.`,
-          isNotification: true
+          message: `Успешно сохранено!`,
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function updateResource
-     * @async
-     * @param {Object} payload resource
-     * Функция для обновления ресурса
-     */
-    async updateResource({
+    async update({
       commit
     }, payload) {
       setTimeout(() => {
-        commit('setResource', payload);
-        this.dispatch("fetchNotification", {
+        commit('set', payload);
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено.`,
-          isNotification: true
+          message: `Успешно сохранено!`,
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function deleteResource
-     * @async
-     * @param {String} payload resource.id
-     * Функция для удаления ресурса
-     */
-    async removeResource({
+    async remove({
       commit
     }, payload) {
       setTimeout(() => {
-        this.dispatch("fetchNotification", {
+        this.dispatch('resource/clear');
+        this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно удалено.`,
-          isNotification: true
+          message: `Успешно удалено!`,
+          isActive: true
         });
       }, 1500);
     },
 
-    /**
-     * @function fetchResourceChilds
-     * @async
-     * @param {Object} payload {resource.id, skip, limit}
-     * Фу
-     */
-    async fetchResourceChilds({
+    async fetchAll({
       commit
     }, payload) {
-      commit('setResourceChilds', [{
-        id: "2",
-        slug: "Resource_1",
-        title: "Resource 2",
-        description: "New test resource 1",
-        content: "New test resource 1",
-        published: false,
-        createdAt: "2019-07-16",
-        layout: {
-          id: "1",
-          title: "Базовый шаблон",
-          slug: "base"
-        },
-        managerId: "1",
-        fields: [],
-        children: [],
-        parentId: ""
-      }]);
+      setTimeout(() => {
+        commit('setAll', [resource]);
+      }, 1500);
     },
 
-    setResource({
+    set({
       commit
     }, payload) {
-      commit('setResource', resource);
+      commit('set', resource);
     },
 
-    clearResource({
+    clear({
       commit
     }) {
-      commit('setResource', {})
+      commit('set', defaultResource)
     }
   },
   getters: {
-    getResource(state) {
+    get(state) {
       return state.resource;
     },
-    getResourceChilds(state) {
-      return state.resourceChilds;
+    getAll(state) {
+      return state.resources;
     },
     getLayout(state) {
       return state.layout;
