@@ -51,6 +51,7 @@ import accessMixin from "@/mixins/accessMixin";
 
 export default {
   name: "Layouts",
+
   mixins: [accessMixin],
 
   data() {
@@ -73,6 +74,14 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("layout/fetchAll", {
+      id: this.$route.params.id,
+      skip: this.$route.query.skip,
+      limit: this.$route.query.limit
+    });
+  },
+
   methods: {
     async getPage({ skip, limit }) {
       await this.$store.dispatch("user/fetchAll", {
@@ -89,14 +98,6 @@ export default {
       this.removeItem = layout;
       this.isRemoveDialog = true;
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("layout/fetchAll", {
-      id: this.$route.params.id,
-      skip: this.$route.query.skip,
-      limit: this.$route.query.limit
-    });
   }
 };
 </script>

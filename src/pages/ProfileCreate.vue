@@ -16,14 +16,17 @@ import profile from "@/models/profile";
 
 export default {
   name: "ProfileCreatePage",
+
+  components: {
+    ProfileView
+  },
+
   mixins: [accessMixin],
+
   data() {
     return {
       profile
     };
-  },
-  components: {
-    ProfileView
   }
 };
 </script>

@@ -101,16 +101,21 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "FieldView",
+
+  mixins: [accessMixin, panelMixin, validationMixin],
+
   props: {
     field: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     },
     operationType: {
       type: String,
       default: "create"
     }
   },
-  mixins: [accessMixin, panelMixin, validationMixin],
 
   validations: {
     field: {
@@ -161,6 +166,10 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("layout/fetchAll");
+  },
+
   methods: {
     /**
      * @function create
@@ -202,10 +211,6 @@ export default {
       await this.$store.dispatch("field/remove", this.field.id);
       this.$router.push("/fields");
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("layout/fetchAll");
   }
 };
 </script>

@@ -10,6 +10,7 @@
 <script>
 export default {
   name: "RemoveConfirm",
+
   props: {
     name: {
       type: String,
@@ -20,6 +21,7 @@ export default {
       default: false
     }
   },
+
   methods: {
     remove() {
       this.$emit("remove");

@@ -13,15 +13,18 @@ import ProfileView from "@/components/Profile/View";
 
 export default {
   name: "UserPage",
+
+  components: {
+    ProfileView
+  },
+
   mixins: [accessMixin],
   computed: {
     user() {
       return this.$store.getters["user/get"];
     }
   },
-  components: {
-    ProfileView
-  },
+
   async beforeCreate() {
     await this.$store.dispatch("user/fetch", this.$route.params.id);
   }

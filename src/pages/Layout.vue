@@ -25,6 +25,12 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "LayoutPage",
+
+  components: {
+    Fields,
+    LayoutView
+  },
+
   mixins: [accessMixin, panelMixin, validationMixin],
 
   validations: {
@@ -65,11 +71,6 @@ export default {
       !this.$v.layout.title.required && errors.push("Обязательное поле");
       return errors;
     }
-  },
-
-  components: {
-    Fields,
-    LayoutView
   },
 
   async mounted() {

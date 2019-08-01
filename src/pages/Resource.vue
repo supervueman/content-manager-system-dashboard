@@ -38,6 +38,13 @@ import Resources from "@/components/Resource/Resources";
 
 export default {
   name: "Resource",
+
+  components: {
+    ResourceView,
+    Resources,
+    Fields
+  },
+
   mixins: [accessMixin],
 
   data() {
@@ -51,12 +58,6 @@ export default {
     resource() {
       return this.$store.getters["resource/get"];
     }
-  },
-
-  components: {
-    ResourceView,
-    Resources,
-    Fields
   },
 
   async mounted() {

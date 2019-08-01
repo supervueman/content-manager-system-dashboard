@@ -141,6 +141,12 @@ import {
 export default {
   name: "Editor",
 
+  components: {
+    Filesystem,
+    EditorContent,
+    EditorMenuBar
+  },
+
   props: {
     content: {
       type: String,
@@ -183,6 +189,11 @@ export default {
       command: null
     };
   },
+
+  beforeDestroy() {
+    this.editor.destroy();
+  },
+
   methods: {
     showImage(command, src) {
       this.isActiveDialog = true;
@@ -192,14 +203,6 @@ export default {
       this.command({ src: `/static/${file.path}` });
       this.isActiveDialog = false;
     }
-  },
-  components: {
-    Filesystem,
-    EditorContent,
-    EditorMenuBar
-  },
-  beforeDestroy() {
-    this.editor.destroy();
   }
 };
 </script>

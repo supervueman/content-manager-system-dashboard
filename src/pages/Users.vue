@@ -45,7 +45,7 @@
                     v-icon delete
             div.text-xs-center.pt-2
               pagination(
-                :itemsLength="users.length"
+                :itemsLength="count"
                 @getPage="getPage"
               )
         v-dialog(
@@ -68,6 +68,7 @@ import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "Users",
+
   mixins: [accessMixin],
 
   data() {
@@ -91,7 +92,17 @@ export default {
   computed: {
     users() {
       return this.$store.getters["user/getAll"];
+    },
+    count() {
+      return this.$store.getters["user/getCount"];
     }
+  },
+
+  async mounted() {
+    await this.$store.dispatch("user/fetchAll", {
+      skip: this.$route.query.skip || 0,
+      limit: this.$route.query.limit || 5
+    });
   },
 
   methods: {
@@ -110,14 +121,6 @@ export default {
       this.removeItem = user;
       this.isRemoveDialog = true;
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("user/fetchAll", {
-      id: this.$route.params.id,
-      skip: this.$route.query.skip,
-      limit: this.$route.query.limit
-    });
   }
 };
 </script>

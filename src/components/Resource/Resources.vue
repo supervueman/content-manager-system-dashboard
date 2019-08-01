@@ -62,7 +62,13 @@ import accessMixin from "@/mixins/accessMixin";
 
 export default {
   name: "Resources",
+
+  components: {
+    ResourceCreate
+  },
+
   mixins: [accessMixin],
+
   data() {
     return {
       headers: [
@@ -91,6 +97,14 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("resource/fetchAll", {
+      id: this.$route.params.id,
+      skip: this.$route.query.skip,
+      limit: this.$route.query.limit
+    });
+  },
+
   methods: {
     async getPage({ skip, limit }) {
       await this.$store.dispatch("resource/fetchAll", {
@@ -107,18 +121,6 @@ export default {
       this.removeResource = resource;
       this.isRemoveDialog = true;
     }
-  },
-
-  components: {
-    ResourceCreate
-  },
-
-  async mounted() {
-    await this.$store.dispatch("resource/fetchAll", {
-      id: this.$route.params.id,
-      skip: this.$route.query.skip,
-      limit: this.$route.query.limit
-    });
   }
 };
 </script>

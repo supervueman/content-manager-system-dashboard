@@ -50,7 +50,9 @@ import { helpers, required, sameAs, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "PasswordChange",
+
   mixins: [validationMixin],
+
   validations: {
     oldPassword: {
       required,
@@ -66,6 +68,7 @@ export default {
       sameAsPassword: sameAs("newPassword")
     }
   },
+
   data() {
     return {
       oldPassword: "",
@@ -76,6 +79,7 @@ export default {
       showConfirmNewPassword: false
     };
   },
+
   computed: {
     oldPasswordErrors() {
       const errors = [];
@@ -104,6 +108,7 @@ export default {
       return errors;
     }
   },
+
   methods: {
     /**
      * @function

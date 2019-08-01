@@ -7,12 +7,14 @@
 import config from "@/config";
 export default {
   name: "Avatar",
+
   props: {
     imagePath: {
       type: String,
       default: `${config.staticFolderBasePath}/logo.png`
     }
   },
+
   data() {
     return {
       staticFolderBasePath: config.staticFolderBasePath

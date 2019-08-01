@@ -26,7 +26,9 @@ import { imgFolderBasePath } from "@/config";
 import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "Toolbar",
+
   mixins: [accessMixin],
+
   props: {
     profileId: {
       type: String,
@@ -45,16 +47,19 @@ export default {
       default: ""
     }
   },
+
   data() {
     return {
       imgFolderBasePath
     };
   },
+
   computed: {
     profile() {
       return this.$store.getters["profile/getProfile"];
     }
   },
+
   methods: {
     async logout() {
       await this.$store.dispatch("authenticate/logout");

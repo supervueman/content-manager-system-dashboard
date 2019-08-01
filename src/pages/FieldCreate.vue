@@ -19,16 +19,17 @@ import FieldView from "@/components/Field/View";
 
 export default {
   name: "FieldCreatePage",
+
+  components: {
+    FieldView
+  },
+
   mixins: [accessMixin],
 
   data() {
     return {
       field
     };
-  },
-
-  components: {
-    FieldView
   }
 };
 </script>

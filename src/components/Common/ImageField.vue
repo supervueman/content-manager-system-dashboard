@@ -26,12 +26,18 @@ import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "ImageField",
+
+  components: {
+    Filesystem
+  },
+
   props: {
     path: {
       type: String,
       default: ""
     }
   },
+
   data() {
     return {
       isActiveDialog: false,
@@ -46,10 +52,6 @@ export default {
       console.log(file);
       this.$emit("selectFile", file.path);
     }
-  },
-
-  components: {
-    Filesystem
   }
 };
 </script>

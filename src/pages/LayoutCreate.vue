@@ -20,16 +20,17 @@ import layout from "@/models/layout";
 
 export default {
   name: "LayoutCreatePage",
+
+  components: {
+    LayoutView
+  },
+
   mixins: [accessMixin],
 
   data() {
     return {
       layout
     };
-  },
-
-  components: {
-    LayoutView
   }
 };
 </script>

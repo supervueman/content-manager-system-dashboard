@@ -140,16 +140,22 @@
 <script>
 export default {
   name: "MigxFieldCreateDialog",
+
   props: {
     schema: {
       type: String,
       default: ""
     }
   },
+
   data() {
     return {
       fields: {}
     };
+  },
+
+  mounted() {
+    this.parseFields();
   },
 
   methods: {
@@ -172,10 +178,6 @@ export default {
       }
       this.fields = fields;
     }
-  },
-
-  mounted() {
-    this.parseFields();
   }
 };
 </script>

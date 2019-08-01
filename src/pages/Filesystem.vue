@@ -10,6 +10,7 @@ import Filesystem from "@/components/Filesystem/Filesystem";
 
 export default {
   name: "FilesystemPage",
+
   components: {
     Filesystem
   }

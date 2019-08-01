@@ -13,14 +13,17 @@ import ProfileView from "@/components/Profile/View";
 
 export default {
   name: "ProfilePage",
+
+  components: {
+    ProfileView
+  },
+
   mixins: [accessMixin],
+
   computed: {
     profile() {
       return this.$store.getters["profile/get"];
     }
-  },
-  components: {
-    ProfileView
   }
 };
 </script>

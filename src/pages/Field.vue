@@ -15,6 +15,11 @@ import accessMixin from "@/mixins/accessMixin";
 import FieldView from "@/components/Field/View";
 export default {
   name: "FieldPage",
+
+  components: {
+    FieldView
+  },
+
   mixins: [accessMixin],
 
   data() {
@@ -30,6 +35,10 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("field/fetch");
+  },
+
   methods: {
     async update() {
       this.$v.$touch();
@@ -40,14 +49,6 @@ export default {
     async remove() {
       await this.$store.dispatch("field/remove", this.field.id);
     }
-  },
-
-  components: {
-    FieldView
-  },
-
-  async mounted() {
-    await this.$store.dispatch("field/fetch");
   }
 };
 </script>

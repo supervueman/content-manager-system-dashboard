@@ -153,16 +153,22 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "ResourceView",
+
   mixins: [accessMixin, validationMixin],
+
   props: {
     resource: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     },
     operationType: {
       type: String,
       default: "create"
     }
   },
+
   validations: {
     resource: {
       slug: { required, alpha, minLength: minLength(3) },
@@ -201,6 +207,10 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("layout/fetchAll");
+  },
+
   methods: {
     create() {
       this.$v.$touch();
@@ -218,10 +228,6 @@ export default {
       this.$store.dispatch("resource/remove", this.resource.id);
       this.$router.push("/");
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("layout/fetchAll");
   }
 };
 </script>

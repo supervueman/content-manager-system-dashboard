@@ -146,7 +146,9 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "ResourceCreate",
+
   mixins: [accessMixin, panelMixin, validationMixin],
+
   validations: {
     resource: {
       slug: { required, alpha, minLength: minLength(3) },
@@ -174,6 +176,7 @@ export default {
       }
     };
   },
+
   computed: {
     slugErrors() {
       const errors = [];

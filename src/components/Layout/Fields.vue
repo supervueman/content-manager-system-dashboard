@@ -78,6 +78,14 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("field/fetchAll", {
+      id: this.$route.params.id,
+      skip: this.$route.query.skip,
+      limit: this.$route.query.limit
+    });
+  },
+
   methods: {
     toggleAll() {
       if (this.selected.length) this.selected = [];
@@ -91,14 +99,6 @@ export default {
         this.pagination.descending = false;
       }
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("field/fetchAll", {
-      id: this.$route.params.id,
-      skip: this.$route.query.skip,
-      limit: this.$route.query.limit
-    });
   }
 };
 </script>

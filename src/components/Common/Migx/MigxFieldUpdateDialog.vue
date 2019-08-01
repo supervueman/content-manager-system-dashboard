@@ -136,9 +136,13 @@
 <script>
 export default {
   name: "MigxFieldUpdateDialog",
+
   props: {
     fields: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     }
   }
 };

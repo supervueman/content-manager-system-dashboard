@@ -19,21 +19,26 @@ import { validationMixin } from "vuelidate";
 import { required, minLength, sameAs, email } from "vuelidate/lib/validators";
 export default {
   name: "CreateFolder",
+
   mixins: [validationMixin],
-  validations: {
-    folderName: { required, minLength: minLength(3) }
-  },
+
   props: {
     isActive: {
       type: Boolean,
       default: false
     }
   },
+
+  validations: {
+    folderName: { required, minLength: minLength(3) }
+  },
+
   data() {
     return {
       folderName: ""
     };
   },
+
   computed: {
     folderNameErrors() {
       const errors = [];
@@ -44,6 +49,7 @@ export default {
       return errors;
     }
   },
+
   methods: {
     createFolder() {
       this.$v.$touch();

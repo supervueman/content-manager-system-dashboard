@@ -20,16 +20,17 @@ import resource from "@/models/resource";
 
 export default {
   name: "ResourceCreatePage",
+
+  components: {
+    ResourceView
+  },
+
   mixins: [accessMixin],
 
   data() {
     return {
       resource
     };
-  },
-
-  components: {
-    ResourceView
   }
 };
 </script>

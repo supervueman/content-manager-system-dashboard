@@ -39,17 +39,21 @@ import { validationMixin } from "vuelidate";
 import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
   name: "Login",
+
   mixins: [validationMixin],
+
   validations: {
     password: { required, minLength: minLength(6) },
     email: { required, email }
   },
+
   data() {
     return {
       email: "",
       password: ""
     };
   },
+
   computed: {
     passErrors() {
       const errors = [];
@@ -67,6 +71,7 @@ export default {
       return errors;
     }
   },
+
   mounted() {
     const self = this;
     const form = document.getElementById("form");
@@ -77,6 +82,7 @@ export default {
       }
     };
   },
+
   methods: {
     async submit() {
       this.$v.$touch();

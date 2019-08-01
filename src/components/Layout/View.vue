@@ -77,16 +77,25 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "LayoutView",
+
+  components: {
+    Fields
+  },
+
+  mixins: [accessMixin, validationMixin],
+
   props: {
     operationType: {
       type: String,
       default: "create"
     },
     layout: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
-  mixins: [accessMixin, validationMixin],
 
   validations: {
     layout: {
@@ -165,10 +174,6 @@ export default {
       await this.$store.dispatch("layout/remove", this.layout.id);
       this.$router.push("/layouts");
     }
-  },
-
-  components: {
-    Fields
   }
 };
 </script>

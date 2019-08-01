@@ -104,6 +104,13 @@ import TreeviewControls from "./TreeviewControls";
 
 export default {
   name: "FilesystemComponent",
+
+  components: {
+    ContextMenuList,
+    CreateFolder,
+    TreeviewControls
+  },
+
   data: () => ({
     open: [],
     tree: [],
@@ -143,6 +150,7 @@ export default {
       name: ""
     }
   }),
+
   computed: {
     filesystem() {
       return this.$store.getters["filesystem/getFilesystem"];
@@ -151,9 +159,11 @@ export default {
       return this.$store.getters["filesystem/getFolderContent"];
     }
   },
+
   beforeCreate() {
     this.$store.dispatch("filesystem/fetchFilesystem");
   },
+
   methods: {
     /**
      * @function fetchFolderContent
@@ -260,11 +270,6 @@ export default {
     openDialogForCreateFolder(bool) {
       this.isCreateFolderDialog = bool;
     }
-  },
-  components: {
-    ContextMenuList,
-    CreateFolder,
-    TreeviewControls
   }
 };
 </script>

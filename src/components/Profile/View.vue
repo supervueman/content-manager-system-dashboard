@@ -192,16 +192,25 @@ import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "ProfileView",
+
+  components: {
+    PasswordChange
+  },
+
+  mixins: [validationMixin, accessMixin, panelMixin],
+
   props: {
     profile: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     },
     operationType: {
       type: String,
       default: "update"
     }
   },
-  mixins: [validationMixin, accessMixin, panelMixin],
 
   validations: {
     profile: {
@@ -235,33 +244,33 @@ export default {
       const errors = [];
       if (!this.$v.profile.slug.$dirty) return errors;
       !this.$v.profile.slug.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов");
+        errors.push("Псевдоним должен быть не менее 3 символов!");
       !this.$v.profile.slug.alpha &&
-        errors.push("Разрешены только английские символы");
-      !this.$v.profile.slug.required && errors.push("Обязательное поле");
+        errors.push("Разрешены только английские символы!");
+      !this.$v.profile.slug.required && errors.push("Обязательное поле!");
       return errors;
     },
     emailErrors() {
       const errors = [];
       if (!this.$v.profile.email.$dirty) return errors;
-      !this.$v.profile.email.email && errors.push("E-mail не валиден");
-      !this.$v.profile.email.required && errors.push("Обязательное поле");
+      !this.$v.profile.email.email && errors.push("E-mail не валиден!");
+      !this.$v.profile.email.required && errors.push("Обязательное поле!");
       return errors;
     },
     passwordErrors() {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.required && errors.push("Обязательное поле");
+      !this.$v.password.required && errors.push("Обязательное поле!");
       !this.$v.password.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push("Пароль должен быть не менее 6 символов!");
       return errors;
     },
     confirmPasswordErrors() {
       const errors = [];
       if (!this.$v.confirmPassword.$dirty) return errors;
-      !this.$v.confirmPassword.required && errors.push("Обязательное поле");
+      !this.$v.confirmPassword.required && errors.push("Обязательное поле!");
       !this.$v.confirmPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push("Пароль должен быть не менее 6 символов!");
       !this.$v.confirmPassword.sameAsPassword &&
         errors.push("Пароли не совпадают!");
       return errors;
@@ -279,10 +288,11 @@ export default {
      * данные через {@link store/user/fetch} для
      * дальнейшего редактирования
      */
-    async create() {
+    create() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("profile/create", this.profile);
+        this.profile.password = this.password;
+        this.$store.dispatch("profile/create", this.profile);
       }
     },
 
@@ -323,10 +333,6 @@ export default {
         this.$router.push("/");
       }
     }
-  },
-
-  components: {
-    PasswordChange
   }
 };
 </script>

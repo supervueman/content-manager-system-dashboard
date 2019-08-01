@@ -1,5 +1,7 @@
 import profile from '@/fakers/admin';
-import defaultProfile from '@/models/profile'
+import defaultProfile from '@/models/profile';
+import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -23,13 +25,23 @@ export default {
     async create({
       commit
     }, payload) {
-      await setTimeout(() => {
+      const data = requestDataHandler('POST', 'http://localhost:3000/profile/create', payload);
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
         this.dispatch("notification/fetch", {
           type: "success",
           message: `Успешно сохранено!`,
           isActive: true
         });
-      }, 1500);
+      } else {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `Ошибка при создании!`,
+          isActive: true
+        });
+      }
     },
 
     async update({

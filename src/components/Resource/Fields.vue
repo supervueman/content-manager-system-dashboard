@@ -149,14 +149,19 @@ import MigxField from "@/components/Common/Migx/MigxField";
 
 export default {
   name: "ResourceFields",
+
+  components: {
+    ContextMenuList,
+    CreateFolder,
+    TreeviewControls
+  },
+
   computed: {
     fields() {
       return this.$store.getters["resource/getFields"];
     }
   },
 
-  components: {
-    MigxField
-  }
+  x
 };
 </script>

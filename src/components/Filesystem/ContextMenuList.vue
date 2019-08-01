@@ -25,9 +25,13 @@
 <script>
 export default {
   name: "ContextMenuList",
+
   props: {
     currentFile: {
-      type: Object
+      type: Object,
+      default() {
+        return {};
+      }
     }
   }
 };

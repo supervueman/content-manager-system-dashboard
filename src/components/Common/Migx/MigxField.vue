@@ -66,10 +66,18 @@ import MigxFieldUpdateDialog from "./MigxFieldUpdateDialog";
 
 export default {
   name: "MigxField",
+
+  components: {
+    MigxFieldCreateDialog,
+    MigxFieldUpdateDialog
+  },
+
   props: {
     field: {
-      type: Array
-      // default: []
+      type: Array,
+      default() {
+        return [];
+      }
     },
     schema: {
       type: String,
@@ -128,11 +136,6 @@ export default {
       this.$emit("remove", this.removeItemIndex);
       this.isRemoveDialog = false;
     }
-  },
-
-  components: {
-    MigxFieldCreateDialog,
-    MigxFieldUpdateDialog
   }
 };
 </script>
