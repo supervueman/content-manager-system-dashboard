@@ -11,12 +11,8 @@ import axios from 'axios';
 commonComponentsRequire();
 
 Vue.config.productionTip = false;
-const baseUrl =
-  process.env.NODE_ENV === 'development' ?
-  process.env.VUE_APP_SERVER_URL_DEV :
-  process.env.VUE_APP_SERVER_URL_PROD;
 
-axios.defaults.baseURL = baseUrl;
+axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
 
 new Vue({
   router,
